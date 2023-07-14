@@ -17,4 +17,7 @@ jobs:
     name: SC SDK
     uses: ./.github/workflows/sc-sdk.yml
     with:
-      mongo-version: $MONGO_VERSION
+      mongo-version: ${{ env.MONGO_VERSION }}
+    steps:
+      - name: "Test2"
+        run: echo "Today is $MONGO_VERSION!"
