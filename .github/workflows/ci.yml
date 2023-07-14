@@ -17,4 +17,4 @@ jobs:
     name: SC SDK
     uses: ./.github/workflows/sc-sdk.yml
     with:
-      mongo-version: ${{ fromJSON(needs.change-detection.outputs.envs).MONGO_VERSION }}
+      mongo-version: ${{MONGO_VERSION}}
