@@ -18,6 +18,3 @@ jobs:
     uses: ./.github/workflows/sc-sdk.yml
     with:
       mongo-version: ${{ fromJSON(needs.change-detection.outputs.envs).MONGO_VERSION }}
-    needs:
-      - build-images
-      - change-detection
