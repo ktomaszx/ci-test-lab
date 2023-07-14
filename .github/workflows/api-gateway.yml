@@ -11,6 +11,7 @@ jobs:
       - name: Unit Tests
         run: |
           echo "UNIT TEST - test"
+          exit 1
   unit-tests:
     name: Unit Tests
     runs-on: ubuntu-latest
