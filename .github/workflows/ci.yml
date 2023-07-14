@@ -18,6 +18,3 @@ jobs:
     uses: ./.github/workflows/sc-sdk.yml
     with:
       mongo-version: ${{ env.MONGO_VERSION }}
-    steps:
-      - name: "Test2"
-        run: echo "Today is $MONGO_VERSION!"
