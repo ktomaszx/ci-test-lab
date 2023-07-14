@@ -1,0 +1,16 @@
+name: SC SDK checks
+on:
+  workflow_call:
+    inputs:
+      mongo-version:
+        description: 'MongoDB version'
+        type: string
+        required: true
+jobs:
+  style-checks:
+    name: Style Checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Unit Tests
+        run: |
+          echo ${{ inputs.mongo-version }}

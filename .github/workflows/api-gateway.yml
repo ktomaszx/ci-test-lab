@@ -1,0 +1,20 @@
+name: API Gateway
+
+on:
+  workflow_call:
+
+jobs:
+  style-checks:
+    name: Style Checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Unit Tests
+        run: |
+          echo "UNIT TEST - test"
+  unit-tests:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Unit Tests
+        run: |
+          echo "UNIT TEST - test"
