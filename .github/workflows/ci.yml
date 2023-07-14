@@ -6,8 +6,6 @@ name: CI
 on:
   workflow_dispatch:
 
-env:
-  MONGO_VERSION: 6.0.7
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   api-gateway-checks:
@@ -17,4 +15,4 @@ jobs:
     name: SC SDK
     uses: ./.github/workflows/sc-sdk.yml
     with:
-      mongo-version: ${{ env.MONGO_VERSION }}
+      mongo-version: 1.6.0
