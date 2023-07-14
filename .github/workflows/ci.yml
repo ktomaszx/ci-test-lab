@@ -8,11 +8,28 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  api-gateway-checks:
-    name: API Gateway
-    uses: ./.github/workflows/api-gateway.yml
-  sc-sdk-checks:
-    name: SC SDK
-    uses: ./.github/workflows/sc-sdk.yml
-    with:
-      mongo-version: 1.6.0
+  # api-gateway-checks:
+  #   name: API Gateway
+  #   uses: ./.github/workflows/api-gateway.yml
+  # sc-sdk-checks:
+  #   name: SC SDK
+  #   uses: ./.github/workflows/sc-sdk.yml
+  #   with:
+  #     mongo-version: 1.6.0
+  checks-matrix:
+    name: checks-matrix
+    steps:
+      - name: toml
+        uses: SebRollen/toml-action@v1.0.2
+        id: read_toml
+        with:
+          file: 'checks_conf.toml'
+          mongo-version: '${{ matrix.component }}.mongo-version'
+      - name: matrix
+        uses: ./.github/workflows/${{ matrix.component }}.yml
+        with:
+          mongo-version: steps.read_toml.outputs.value
+        strategy:
+          fail-fast: false
+          matrix:
+            component: [api-gateway, sc-sdk]

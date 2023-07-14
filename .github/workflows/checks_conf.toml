@@ -1,0 +1,4 @@
+[api-gateway]
+
+[sc-sdk]
+mongo-version = 1.6.0
