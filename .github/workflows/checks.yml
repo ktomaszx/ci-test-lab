@@ -6,7 +6,7 @@ on:
       check:
         required: true
         type: string
-      mongo:
+      mongo-version:
         required: false
         type: string
 
