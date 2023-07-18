@@ -2,6 +2,10 @@ name: One Big
 
 on:
   workflow_call:
+    inputs:
+      check:
+        required: true
+        type: string
 
 jobs:
   check1:
