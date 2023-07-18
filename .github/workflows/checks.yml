@@ -1,10 +1,11 @@
-name: API Gateway
+name: One Big
 
 on:
   workflow_call:
 
 jobs:
-  style-checks:
+  check1:
+    if: check == 'check1'
     name: Style Checks
     runs-on: ubuntu-latest
     steps:
@@ -12,7 +13,8 @@ jobs:
         run: |
           echo "UNIT TEST - test"
           exit 1
-  unit-tests:
+  check2:
+    if: check == 'check2'
     name: Unit Tests
     runs-on: ubuntu-latest
     steps:

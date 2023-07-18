@@ -8,16 +8,18 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  api-gateway-checks:
-    name: API Gateway
-    uses: ./.github/workflows/api-gateway.yml
-  sc-sdk-checks:
-    name: SC SDK
-    uses: ./.github/workflows/sc-sdk.yml
-    with:
-      mongo-version: 1.6.0
-    needs:
-      - api-gateway-checks
+  checks:
+    name: Checks
+    uses: ./.github/workflows/checks.yml
+    with: 
+      check: check1
+  # sc-sdk-checks:
+  #   name: SC SDK
+  #   uses: ./.github/workflows/sc-sdk.yml
+  #   with:
+  #     mongo-version: 1.6.0
+  #   needs:
+  #     - api-gateway-checks
   # checks-matrix:
   #   name: checks-matrix
   #   uses: ./.github/workflows/${{ matrix.component }}.yml
