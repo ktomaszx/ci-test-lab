@@ -20,12 +20,13 @@ jobs:
   #     mongo-version: 1.6.0
   #   needs:
   #     - api-gateway-checks
-  # checks-matrix:
-  #   name: checks-matrix
-  #   uses: ./.github/workflows/${{ matrix.component }}.yml
-  #   with:
-  #     mongo-version: 1.6.0
-  #   strategy:
-  #     fail-fast: false
-  #     matrix:
-  #       component: [api-gateway, sc-sdk]
+  checks-matrix:
+    name: checks-matrix
+    uses: ./.github/workflows/checks.yml
+    with:
+      check: ${{ matrix.component }}
+      mongo-version: 1.6.0
+    strategy:
+      fail-fast: false
+      matrix:
+        component: [check1, check2]

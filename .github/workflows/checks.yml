@@ -6,6 +6,9 @@ on:
       check:
         required: true
         type: string
+      mongo:
+        required: false
+        type: string
 
 jobs:
   check1:
@@ -16,7 +19,6 @@ jobs:
       - name: Unit Tests
         run: |
           echo "UNIT TEST - test"
-          exit 1
   check2:
     if: inputs.check == 'check2'
     name: Unit Tests
@@ -25,3 +27,4 @@ jobs:
       - name: Unit Tests
         run: |
           echo "UNIT TEST - test"
+          echo ${{ inputs.mongo }}
