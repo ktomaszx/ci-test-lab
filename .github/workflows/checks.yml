@@ -9,7 +9,7 @@ on:
 
 jobs:
   check1:
-    if: check == 'check1'
+    if: inputs.check == 'check1'
     name: Style Checks
     runs-on: ubuntu-latest
     steps:
@@ -18,7 +18,7 @@ jobs:
           echo "UNIT TEST - test"
           exit 1
   check2:
-    if: check == 'check2'
+    if: inputs.check == 'check2'
     name: Unit Tests
     runs-on: ubuntu-latest
     steps:
