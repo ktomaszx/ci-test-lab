@@ -10,7 +10,7 @@ jobs:
     name: Detect changes
     runs-on: ubuntu-latest
     outputs:
-      operator-check-components: ${{ steps.set-operators-matrix.outputs.operator-check }}
+      operator-check-components: ${{ steps.filter_python_simple_check.outputs.operator-check }}
     steps:
       - name: Filter changes for operator
         id: filter_python_simple_check
