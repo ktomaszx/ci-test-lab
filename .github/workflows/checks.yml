@@ -1,11 +1,11 @@
+name: Operator checks
+
 on:
   workflow_call:
     inputs:
       operator_type:
         required: true
         type: string
-
-name: ${{inputs.operator_type}} operator checks
 
 jobs:
   check1:
