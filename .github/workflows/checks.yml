@@ -1,4 +1,4 @@
-name: One Big
+name: ${{operator_type}} operator checks
 
 on:
   workflow_call:
@@ -6,25 +6,19 @@ on:
       check:
         required: true
         type: string
-      mongo-version:
-        required: false
-        type: string
 
 jobs:
   check1:
-    if: inputs.check == 'check1'
     name: Style Checks
     runs-on: ubuntu-latest
+    container:
+      image: ${{operator_type}}
     steps:
-      - name: Unit Tests
-        run: |
-          echo "UNIT TEST - test"
-  check2:
-    if: inputs.check == 'check2'
-    name: Unit Tests
-    runs-on: ubuntu-latest
-    steps:
-      - name: Unit Tests
-        run: |
-          echo "UNIT TEST - test"
-          echo ${{ inputs.mongo }}
+      - name: Upload coverage to artifacts
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: coverage-operator-${{operator_type}}
+          path: |
+            /root/coverage.xml
+            /root/coverage_html
