@@ -8,25 +8,19 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # checks:
-  #   name: Checks
-  #   uses: ./.github/workflows/checks.yml
-  #   with: 
-  #     check: check1
-  # sc-sdk-checks:
-  #   name: SC SDK
-  #   uses: ./.github/workflows/sc-sdk.yml
-  #   with:
-  #     mongo-version: 1.6.0
-  #   needs:
-  #     - api-gateway-checks
+  change-detection:
+    name: Detect changes
+    outputs:
+      components: [inference-operator, training-operator]
+
   checks-matrix:
     name: ${{ matrix.component }} operator checks
     uses: ./.github/workflows/checks.yml
     with:
       operator_type: ${{ matrix.component }}
-
     strategy:
       fail-fast: false
       matrix:
-        component: [Inference, Training]
+        component: ${{ needs.change-detection.outputs.components }}
+    needs:
+      - change-detection
