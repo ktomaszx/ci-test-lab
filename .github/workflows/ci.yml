@@ -13,6 +13,7 @@ env:
 jobs:
   change-detection:
     name: Detect changes
+    runs-on: ubuntu-latest
     outputs:
       envs: ${{ toJSON(steps.store_envs.outputs) }}
     steps:
