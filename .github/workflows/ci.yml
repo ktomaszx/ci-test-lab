@@ -1,49 +1,45 @@
 # This is a basic workflow to help you get started with Actions
 
-# name: CI
+name: CI
 
-# # Controls when the workflow will run
-# on:
-#   workflow_dispatch:
+# Controls when the workflow will run
+on:
+  workflow_dispatch:
 
-# # A workflow run is made up of one or more jobs that can run sequentially or in parallel
-# env:
-#   COMP: '["TEST", "TEST2"]'
-
-# jobs:
-#   change-detection:
-#     name: Detect changes
-#     runs-on: ubuntu-latest
-#     outputs:
-#       matrix: ${{ steps.set-matrix.outputs.matrix }}
-#     steps:
-#     - id: set-matrix
-#       run: echo "::set-output name=matrix::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
-#   checks-matrix:
-#     name: ${{ matrix.component }} operator checks
-#     uses: ./.github/workflows/checks.yml
-#     with:
-#       operator_type: ${{ matrix.component }}
-#     strategy:
-#       fail-fast: false
-#       matrix:
-#         component: ${{fromJSON(needs.change-detection.outputs.matrix)}}
-#     needs: change-detection
-
-name: build
-on: push
 jobs:
-  job1:
+  change-detection:
+    name: Detect changes
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
-      - id: set-matrix
-        run: echo "matrix={\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}" >> $GITHUB_OUTPUT
-  job2:
-    needs: job1
-    runs-on: ubuntu-latest
+    - id: set-matrix
+      run: echo "::set-output name=matrix::{\"include\":[{\"project\":\"interference\"},{\"project\":\"trainning\"}]}"
+  checks-matrix:
+    name: ${{ matrix.component }} operator checks
+    uses: ./.github/workflows/checks.yml
+    with:
+      operator_type: ${{ matrix.component }}
     strategy:
-      matrix: ${{ fromJSON(needs.job1.outputs.matrix) }}
-    steps:
-      - run: build
+      fail-fast: false
+      matrix:
+        component: ${{fromJSON(needs.change-detection.outputs.matrix)}}
+    needs: change-detection
+
+# name: build
+# on: push
+# jobs:
+#   job1:
+#     runs-on: ubuntu-latest
+#     outputs:
+#       matrix: ${{ steps.set-matrix.outputs.matrix }}
+#     steps:
+#       - id: set-matrix
+#         run: echo "matrix={\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}" >> $GITHUB_OUTPUT
+#   job2:
+#     needs: job1
+#     runs-on: ubuntu-latest
+#     strategy:
+#       matrix: ${{ fromJSON(needs.job1.outputs.matrix) }}
+#     steps:
+#       - run: build
