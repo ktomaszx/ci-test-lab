@@ -7,11 +7,13 @@ on:
   workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
-env:
-  COMP: '[inference-operator, training-operator]'
+# env:
+#   COMP: '[inference-operator, training-operator]'
 
 jobs:
   checks-matrix:
+    env:
+        COMP: '[inference-operator, training-operator]'
     name: ${{ matrix.component }} operator checks
     uses: ./.github/workflows/checks.yml
     with:
@@ -19,4 +21,4 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        component: ${{ COMP }}
+        component: ${{env.COMP}}
