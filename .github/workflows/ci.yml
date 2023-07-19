@@ -15,10 +15,10 @@ jobs:
     - id: set-matrix
       run: echo "::set-output name=matrix::{\"include\":[{\"project\":\"interference\"},{\"project\":\"trainning\"}]}"
   checks-matrix:
-    name: ${{ matrix.component }} operator checks
+    name: ${{ matrix.project }} operator checks
     uses: ./.github/workflows/checks.yml
     with:
-      operator_type: ${{ matrix.component }}
+      operator_type: ${{ matrix.project }}
     strategy:
       fail-fast: false
       matrix: ${{fromJSON(needs.change-detection.outputs.matrix)}}
