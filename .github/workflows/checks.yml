@@ -3,7 +3,7 @@ name: ${{operator_type}} operator checks
 on:
   workflow_call:
     inputs:
-      check:
+      operator_type:
         required: true
         type: string
 

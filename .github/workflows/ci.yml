@@ -24,7 +24,8 @@ jobs:
     name: checks-matrix
     uses: ./.github/workflows/checks.yml
     with:
-      check: ${{ matrix.component }}
+      operator_type: ${{ matrix.component }}
+
     strategy:
       fail-fast: false
       matrix:
