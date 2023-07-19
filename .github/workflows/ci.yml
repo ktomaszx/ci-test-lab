@@ -17,7 +17,7 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const changes = ['training-operator', 'inference-operator'];
+            const changes = ['training-operator', 'insference-operator'];
             const operatorCheck = [
               'inference-operator', 'training-operator'
             ];
@@ -27,7 +27,7 @@ jobs:
   checks-matrix:
     name: ${{ matrix.component }} operator checks
     uses: ./.github/workflows/checks.yml
-    if: needs.change-detection.result == 'success' && contains(needs.change-detection.outputs.operator-check-components, 'inference')
+    if: needs.change-detection.result == 'success' && contains(needs.change-detection.outputs.operator-check-components, 'inference') || contains(needs.change-detection.outputs.operator-check-components, 'training')
     with:
       operator_type: ${{ matrix.component }}
     strategy:
