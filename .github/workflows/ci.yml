@@ -17,7 +17,7 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const changes = ['training-operator', 'inferedsadsafsance-o321321perator'];
+            const changes = ['training-operator', 'inference-operator'];
             const operatorCheck = [
               'inference-operator', 'training-operator'
             ];
@@ -25,8 +25,9 @@ jobs:
             const operatorNames = operatorChanges.map((element) => element.split('-')[0]);
             core.setOutput('operator-check', operatorNames);
   checks-matrix:
-    name: ${{ matrix.component.charAt(0).toUpperCase() }} operator checks
+    name: ${{ matrix.component }} operator checks
     uses: ./.github/workflows/checks.yml
+    if: needs.change-detection.result == 'success' && contains(needs.change-detection.outputs.operator-check-components, 'inference-operator')
     with:
       operator_type: ${{ matrix.component }}
     strategy:
