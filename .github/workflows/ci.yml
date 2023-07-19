@@ -8,7 +8,7 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 env:
-  COMP: 'TEST'
+  COMPONENTS_LIST: '["component1", "component2", "component3"]'
 
 jobs:
   # change-detection:
@@ -29,5 +29,4 @@ jobs:
       fail-fast: false
       matrix:
         component:
-          - test1
-          - test2
+          - ${{ fromJson(env.COMPONENTS_LIST) }}
