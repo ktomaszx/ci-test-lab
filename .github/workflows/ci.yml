@@ -30,3 +30,4 @@ jobs:
       fail-fast: false
       matrix:
         component: ${{fromJSON(needs.change-detection.outputs.envs).COMP}}
+    needs: change-detection
