@@ -7,12 +7,10 @@ on:
   workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
-jobs:
-  change-detection:
-    name: Detect changes
-    outputs:
-      components: [inference-operator, training-operator]
+env:
+  components: [inference-operator, training-operator]
 
+jobs:
   checks-matrix:
     name: ${{ matrix.component }} operator checks
     uses: ./.github/workflows/checks.yml
@@ -21,6 +19,4 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        component: ${{ needs.change-detection.outputs.components }}
-    needs:
-      - change-detection
+        component: ${{ env.components }}
