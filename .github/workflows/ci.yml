@@ -19,4 +19,4 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        component: ${{ env.COMP }}
+        component: ${{ COMP }}
