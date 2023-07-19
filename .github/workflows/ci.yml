@@ -27,7 +27,7 @@ jobs:
   checks-matrix:
     name: ${{ matrix.component }} operator checks
     uses: ./.github/workflows/checks.yml
-    if: needs.change-detection.result == 'success' && contains(needs.change-detection.outputs.operator-check-components, 'inference-operator')
+    if: needs.change-detection.result == 'success' && contains(needs.change-detection.outputs.operator-check-components, 'inference')
     with:
       operator_type: ${{ matrix.component }}
     strategy:
