@@ -21,7 +21,7 @@ jobs:
   #   needs:
   #     - api-gateway-checks
   checks-matrix:
-    name: checks-matrix
+    name: ${{ matrix.component }} operator checks
     uses: ./.github/workflows/checks.yml
     with:
       operator_type: ${{ matrix.component }}
@@ -29,4 +29,4 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        component: [inference, training]
+        component: [Inference, Training]
