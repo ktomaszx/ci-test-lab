@@ -1,4 +1,4 @@
-name: ${{operator_type}} operator checks
+name: ${{inputs.operator_type}} operator checks
 
 on:
   workflow_call:
@@ -12,13 +12,13 @@ jobs:
     name: Style Checks
     runs-on: ubuntu-latest
     container:
-      image: ${{operator_type}}
+      image: ${{inputs.operator_type}}
     steps:
       - name: Upload coverage to artifacts
         uses: actions/upload-artifact@v3
         if: always()
         with:
-          name: coverage-operator-${{operator_type}}
+          name: coverage-operator-${{inputs.operator_type}}
           path: |
             /root/coverage.xml
             /root/coverage_html
