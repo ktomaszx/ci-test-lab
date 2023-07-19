@@ -13,6 +13,8 @@ env:
 jobs:
   change-detection:
     name: Detect changes
+    outputs:
+      envs: ${{ toJSON(steps.store_envs.outputs) }}
     steps:
       - name: Store envs
         id: store_envs
@@ -26,4 +28,4 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        component: [${{ fromJSON(needs.change-detection.outputs.envs).MONGO_VERSION }}]
+        component: [${{fromJSON(needs.change-detection.outputs.envs).COMP}}]
