@@ -11,8 +11,6 @@ jobs:
   check1:
     name: Style Checks
     runs-on: ubuntu-latest
-    container:
-      image: ${{inputs.operator_type}}
     steps:
       - name: Upload coverage to artifacts
         uses: actions/upload-artifact@v3
