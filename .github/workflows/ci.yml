@@ -25,7 +25,7 @@ jobs:
             const operatorNames = operatorChanges.map((element) => element.split('-')[0]);
             core.setOutput('operator-check', operatorNames);
   checks-matrix:
-    name: ${{ matrix.component }} operator checks
+    name: ${{ matrix.component.charAt(0).toUpperCase() }} operator checks
     uses: ./.github/workflows/checks.yml
     with:
       operator_type: ${{ matrix.component }}
