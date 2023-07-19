@@ -10,10 +10,22 @@ jobs:
     name: Detect changes
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
+      operator-check-components: ${{ steps.set-operators-matrix.outputs.operator-check }}
     steps:
-    - id: set-matrix
-      run: echo "::set-output name=matrix::{\"include\":[{\"project\":\"interference\"},{\"project\":\"trainning\"}]}"
+      - name: Filter changes for operator
+        id: filter_python_simple_check
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const changes = ['training-operator', 'inference-operator'];
+            const operatorCheck = [
+              'inference-operator', 'training-operator'
+            ];
+            const operatorChanges = changes.filter((change) => operatorCheck.includes(change));
+            core.setOutput('operator-check', operatorChanges);
+    # - id: set-operators-matrix
+    #   run: |
+    #     echo "::set-output name=matrix::{\"include\":[{\"project\":\"interference\"},{\"project\":\"trainning\"}]}"
   checks-matrix:
     name: ${{ matrix.project }} operator checks
     uses: ./.github/workflows/checks.yml
@@ -21,7 +33,9 @@ jobs:
       operator_type: ${{ matrix.project }}
     strategy:
       fail-fast: false
-      matrix: ${{fromJSON(needs.change-detection.outputs.matrix)}}
+      #matrix: ${{fromJSON(needs.change-detection.outputs.matrix)}}
+      matrix:
+      component: ${{ fromJSON(needs.change-detection.outputs.operator-check-components) }}
     needs: change-detection
 
 # name: build
