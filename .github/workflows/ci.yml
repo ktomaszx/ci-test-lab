@@ -3,8 +3,7 @@
 name: CI
 
 # Controls when the workflow will run
-on:
-  workflow_dispatch:
+on: push
 
 jobs:
   change-detection:
@@ -22,8 +21,7 @@ jobs:
       operator_type: ${{ matrix.component }}
     strategy:
       fail-fast: false
-      matrix:
-        component: ${{fromJSON(needs.change-detection.outputs.matrix)}}
+      matrix: ${{fromJSON(needs.change-detection.outputs.matrix)}}
     needs: change-detection
 
 # name: build
