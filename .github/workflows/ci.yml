@@ -8,18 +8,18 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 env:
-  COMPONENTS_LIST: '["component1", "component2", "component3"]'
+  COMP: 'TEST'
 
 jobs:
-  # change-detection:
-  #   name: Detect changes
-  #   outputs:
-  #     envs: ${{ toJSON(steps.store_envs.outputs) }}
-  #   steps:
-  #     - name: Store envs
-  #       id: store_envs
-  #       run: |
-  #         echo "COMP=$COMP" >> "$GITHUB_OUTPUT"
+  change-detection:
+    name: Detect changes
+    outputs:
+      envs: ${{ toJSON(steps.store_envs.outputs) }}
+    steps:
+      - name: Store envs
+        id: store_envs
+        run: |
+          echo "COMP=$COMP" >> "$GITHUB_OUTPUT"
   checks-matrix:
     name: ${{ matrix.component }} operator checks
     uses: ./.github/workflows/checks.yml
@@ -28,5 +28,4 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        component:
-          - ${{ fromJson(env.COMPONENTS_LIST) }}
+        component: ${{fromJSON(needs.change-detection.outputs.envs).COMP}}
