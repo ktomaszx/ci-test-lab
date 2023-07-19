@@ -12,8 +12,6 @@ on:
 
 jobs:
   checks-matrix:
-    env:
-      COMP: 'TEST'
     name: ${{ matrix.component }} operator checks
     uses: ./.github/workflows/checks.yml
     with:
