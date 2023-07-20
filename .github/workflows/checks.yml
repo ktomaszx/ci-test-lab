@@ -13,5 +13,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run black
-        working-directory: /usr/src/app/microservices/${{ inputs.ie_type }}_ie_microservice
+        working-directory: /usr/src/app/microservices/${{ inputs.operator_type }}_ie_microservice
         run: echo "TEST"
