@@ -12,12 +12,6 @@ jobs:
     name: Style Checks
     runs-on: ubuntu-latest
     steps:
-      - name: Upload coverage to artifacts
-        working-directory: "/usr/src/app/microservices/${{ inputs.operator_type }}_ie_microservice"
-        uses: actions/upload-artifact@v3
-        if: always()
-        with:
-          name: coverage-operator-${{inputs.operator_type}}
-          path: |
-            /root/coverage.xml
-            /root/coverage_html
+      - name: Run black
+        working-directory: "/usr/src/app/microservices/${{ inputs.ie_type }}_ie_microservice"
+        run: echo "TEST"
