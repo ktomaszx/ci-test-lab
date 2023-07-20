@@ -11,7 +11,21 @@ jobs:
   check1:
     name: Style Checks
     runs-on: ubuntu-latest
+    outputs:
+      components: "TEST"
     steps:
       - name: Run black
         working-directory: "/usr/src/app/microservices/${{ inputs.operator_type }}_ie_microservice"
         run: echo "TEST"
+  # check2:
+  #   name: Style Checks
+  #   runs-on: ubuntu-latest
+  #   if: contains(needs.check1.outputs.components, 'TEST')
+  #   needs: 
+  #     - check1
+  #   steps:
+  #     - name: Run black
+  #       working-directory: "/usr/src/app/microservices/${{ inputs.operator_type }}_ie_microservice"
+  #       run: echo "TEST"
+    
+
