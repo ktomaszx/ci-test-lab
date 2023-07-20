@@ -24,6 +24,11 @@ jobs:
             const operatorChanges = changes.filter((change) => operatorCheck.includes(change));
             const operatorNames = operatorChanges.map((element) => element.split('-')[0]);
             core.setOutput('operator-check', operatorNames);
+    steps:
+      - name: Exit
+        id: exittest
+        run: exit 1
+        
   checks-matrix:
     name: ${{ matrix.component }} operator checks
     uses: ./.github/workflows/checks.yml
