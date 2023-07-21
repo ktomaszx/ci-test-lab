@@ -24,37 +24,22 @@ jobs:
             const operatorChanges = changes.filter((change) => operatorCheck.includes(change));
             const operatorNames = operatorChanges.map((element) => element.split('-')[0]);
             core.setOutput('operator-check', operatorNames);
-      - name: Exit
-        id: exittest
+      - name: Convert TOML to JSON
+        id: toml-to-json
         run: | 
-          exit 1
+          python3 --version
+          
         
   checks-matrix:
     name: ${{ matrix.component }} operator checks
     uses: ./.github/workflows/checks.yml
     if: (contains(needs.change-detection.outputs.operator-check-components, 'inference') || contains(needs.change-detection.outputs.operator-check-components, 'training'))
     with:
-      operator_type: ${{ matrix.component }}
+      ie_type: 'test' #read it from config file
+      image_path: 'test' #read it from config file
+      docker_image: 'test' #read it from config file
     strategy:
       fail-fast: false
       matrix:
         component: ${{ fromJSON(needs.change-detection.outputs.operator-check-components) }}
     needs: change-detection
-
-# name: build
-# on: push
-# jobs:
-#   job1:
-#     runs-on: ubuntu-latest
-#     outputs:
-#       matrix: ${{ steps.set-matrix.outputs.matrix }}
-#     steps:
-#       - id: set-matrix
-#         run: echo "matrix={\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}" >> $GITHUB_OUTPUT
-#   job2:
-#     needs: job1
-#     runs-on: ubuntu-latest
-#     strategy:
-#       matrix: ${{ fromJSON(needs.job1.outputs.matrix) }}
-#     steps:
-#       - run: build

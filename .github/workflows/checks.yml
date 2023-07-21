@@ -3,9 +3,18 @@ name: Operator checks
 on:
   workflow_call:
     inputs:
-      operator_type:
-        required: true
+      ie_type:
+        description: 'Import Export type - project or dataset'
         type: string
+        required: true
+      image_path:
+        description: 'Path for docker image'
+        type: string
+        required: true
+      docker_image:
+        description: 'Name of the docker image'
+        type: string
+        required: true
 
 jobs:
   check1:
@@ -15,17 +24,6 @@ jobs:
       components: "TEST"
     steps:
       - name: Run black
-        working-directory: "/usr/src/app/microservices/${{ inputs.operator_type }}_ie_microservice"
-        run: echo "TEST"
-  # check2:
-  #   name: Style Checks
-  #   runs-on: ubuntu-latest
-  #   if: contains(needs.check1.outputs.components, 'TEST')
-  #   needs: 
-  #     - check1
-  #   steps:
-  #     - name: Run black
-  #       working-directory: "/usr/src/app/microservices/${{ inputs.operator_type }}_ie_microservice"
-  #       run: echo "TEST"
+        run: echo ${{ inputs.ie_type }}
     
 
