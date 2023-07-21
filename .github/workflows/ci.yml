@@ -36,6 +36,10 @@ jobs:
             print(json_data)'
         env:
           JSON_DATA: ${{ steps.toml-to-json.outputs.json_data }}
+      - name: Test-json
+        id: test-json
+        run: echo "The JSON data is: $JSON_DATA"
+          
         
   checks-matrix:
     name: ${{ matrix.component }} operator checks
