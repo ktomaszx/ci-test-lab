@@ -29,8 +29,8 @@ jobs:
         run: | 
           python3 -m pip install toml
           python3 -c 'import toml, json, os
-          print(os.listdir("src/"))
-          with open("src/config.toml") as file:
+          print(os.listdir())
+          with open("ci-test-lab/src/config.toml") as file:
             data = toml.load(file)
             json_data = json.dumps(data)
             print(json_data)'
