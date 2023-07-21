@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       operator-check-components: ${{ steps.filter_python_simple_check.outputs.operator-check }}
+      json_data: ${{ steps.toml-to-json.outputs.json_data }}
     steps:
       - uses: actions/checkout@v3
       - name: Filter changes for operator
@@ -44,14 +45,17 @@ jobs:
         
   checks-matrix:
     name: ${{ matrix.component }} operator checks
-    uses: ./.github/workflows/checks.yml
-    if: (contains(needs.change-detection.outputs.operator-check-components, 'inference') || contains(needs.change-detection.outputs.operator-check-components, 'training'))
-    with:
-      ie_type: 'test' #read it from config file
-      image_path: 'test' #read it from config file
-      docker_image: 'test' #read it from config file
-    strategy:
-      fail-fast: false
-      matrix:
-        component: ${{ fromJSON(needs.change-detection.outputs.operator-check-components) }}
+    runs-on: ubuntu-latest
+    #uses: ./.github/workflows/checks.yml
+    #if: (contains(needs.change-detection.outputs.operator-check-components, 'inference') || contains(needs.change-detection.outputs.operator-check-components, 'training'))
+    # with:
+    #   ie_type: 'test' #read it from config file
+    #   image_path: 'test' #read it from config file
+    #   docker_image: 'test' #read it from config file
+    # strategy:
+    #   fail-fast: false
+    #   matrix:
+    #     component: ${{ fromJSON(needs.change-detection.outputs.operator-check-components) }}
+    run: |
+      echo ${{ needs.change-detection.outputs.json_data }} 
     needs: change-detection
