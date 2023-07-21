@@ -29,13 +29,13 @@ jobs:
         id: toml-to-json
         run: | 
           python3 -m pip install toml
-          json_data=$(python3 -c 'import toml, json, os
+          JSON_DATA=$(python3 -c 'import toml, json, os
           with open("src/config.toml") as file:
             data = toml.load(file)
             json_data = json.dumps(data)
             print(json_data)')
-        env:
-          JSON_DATA: ${{ steps.toml-to-json.outputs.json_data }}
+          echo "JSON TEST--------------"
+          echo $JSON_DATA
       - name: Test-json
         id: test-json
         run: | 
