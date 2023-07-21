@@ -38,7 +38,8 @@ jobs:
           JSON_DATA: ${{ steps.toml-to-json.outputs.json_data }}
       - name: Test-json
         id: test-json
-        run: echo "The JSON data is: $JSON_DATA"
+        run: | 
+          echo "The JSON data is: $JSON_DATA"
           
         
   checks-matrix:
