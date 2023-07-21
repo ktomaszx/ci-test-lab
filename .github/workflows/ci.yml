@@ -34,7 +34,8 @@ jobs:
             data = toml.load(file)
             json_data = json.dumps(data)
             print(json_data)'
-          
+        env:
+          JSON_DATA: ${{ steps.toml-to-json.outputs.json_data }}
         
   checks-matrix:
     name: ${{ matrix.component }} operator checks
