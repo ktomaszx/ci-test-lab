@@ -35,7 +35,7 @@ jobs:
             json_data = json.dumps(data)
             print(json_data)')
           echo "JSON TEST--------------"
-          echo $JSON_DATA >> >> $GITHUB_OUTPUT
+          echo $JSON_DATA >> $GITHUB_OUTPUT
       - name: Test-json
         id: test-json
         run: | 
