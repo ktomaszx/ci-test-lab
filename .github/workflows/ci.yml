@@ -27,7 +27,12 @@ jobs:
       - name: Convert TOML to JSON
         id: toml-to-json
         run: | 
-          python3 --version
+          python3 -m pip install toml
+          python3 -c "import toml, json; \
+              with open('../src/config.toml') as file: \
+                  data = toml.load(file); \
+                  json_data = json.dumps(data); \
+                  print(json_data)"
           
         
   checks-matrix:
