@@ -12,6 +12,7 @@ jobs:
     outputs:
       operator-check-components: ${{ steps.filter_python_simple_check.outputs.operator-check }}
     steps:
+      - uses: actions/checkout@v3
       - name: Filter changes for operator
         id: filter_python_simple_check
         uses: actions/github-script@v6
