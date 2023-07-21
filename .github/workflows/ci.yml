@@ -35,11 +35,11 @@ jobs:
             json_data = json.dumps(data)
             print(json_data)')
           echo "JSON TEST--------------"
-          echo $JSON_DATA >> $GITHUB_OUTPUT
+          echo "json_data=$JSON_DATA" >> "$GITHUB_OUTPUT"
       - name: Test-json
         id: test-json
         run: | 
-          echo ${{ steps.toml-to-json.outputs.JSON_DATA }}
+          echo ${{ steps.toml-to-json.outputs.json_data }}
           
         
   checks-matrix:
