@@ -54,7 +54,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        component: [docker_image]
+        component: [project, dataset]
     # steps:
     #   - name: print-json-from-previos-job
     #     id: print-json-from-previos-job
