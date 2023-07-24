@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       operator-check-components: ${{ steps.filter_python_simple_check.outputs.operator-check }}
-      json_data: ${{ toJSON(steps.read-config.outputs.json_data) }}
+      json_data: ${{ steps.read-config.outputs.json_data }}
     steps:
       - uses: actions/checkout@v3
       - name: Filter changes for operator
@@ -34,9 +34,10 @@ jobs:
           with open("src/config.toml") as file:
             data = toml.load(file)
             json_data = json.dumps(data)
-            print(json_data)')
-          echo "JSON TEST--------------"
-          echo "json_data=$JSON_DATA" >> "$GITHUB_OUTPUT"
+            echo "EOF" >> $GITHUB_OUTPUT
+            echo "json_data<<EOF" >> $GITHUB_OUTPUT
+            echo $json_data >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
       - name: Test-json
         id: test-json
         run: | 
