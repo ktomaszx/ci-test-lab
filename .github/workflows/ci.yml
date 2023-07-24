@@ -44,7 +44,7 @@ jobs:
 
   checks-matrix:
     name: ${{ matrix.component }} operator checks
-    //runs-on: ubuntu-latest
+    #runs-on: ubuntu-latest
     uses: ./.github/workflows/checks.yml
     if: (contains(needs.change-detection.outputs.operator-check-components, 'inference') || contains(needs.change-detection.outputs.operator-check-components, 'training'))
     with:
