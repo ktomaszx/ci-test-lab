@@ -24,6 +24,6 @@ jobs:
       components: "TEST"
     steps:
       - name: Run black
-        run: echo ${{ inputs.ie_type }}
+        run: echo ${{ inputs.docker_image }}
     
 
