@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       operator-check-components: ${{ steps.filter_python_simple_check.outputs.operator-check }}
-      json_data: ${{ steps.toml-to-json.outputs.json_data }}
+      json_data: ${{ steps.read-config.outputs.json_data }}
     steps:
       - uses: actions/checkout@v3
       - name: Filter changes for operator
@@ -26,8 +26,8 @@ jobs:
             const operatorChanges = changes.filter((change) => operatorCheck.includes(change));
             const operatorNames = operatorChanges.map((element) => element.split('-')[0]);
             core.setOutput('operator-check', operatorNames);
-      - name: Convert TOML to JSON
-        id: toml-to-json
+      - name: Read config file
+        id: read-config
         run: | 
           python3 -m pip install toml
           JSON_DATA=$(python3 -c 'import toml, json, os
@@ -40,14 +40,13 @@ jobs:
       - name: Test-json
         id: test-json
         run: | 
-          echo ${{ steps.toml-to-json.outputs.json_data }}
-          
-        
+          echo ${{ steps.read-config.outputs.json_data }}
+
   checks-matrix:
     name: ${{ matrix.component }} operator checks
     runs-on: ubuntu-latest
-    #uses: ./.github/workflows/checks.yml
-    #if: (contains(needs.change-detection.outputs.operator-check-components, 'inference') || contains(needs.change-detection.outputs.operator-check-components, 'training'))
+    # uses: ./.github/workflows/checks.yml
+    # if: (contains(needs.change-detection.outputs.operator-check-components, 'inference') || contains(needs.change-detection.outputs.operator-check-components, 'training'))
     # with:
     #   ie_type: 'test' #read it from config file
     #   image_path: 'test' #read it from config file
@@ -55,10 +54,10 @@ jobs:
     # strategy:
     #   fail-fast: false
     #   matrix:
-    #     component: ${{ fromJSON(needs.change-detection.outputs.operator-check-components) }}
+    #     component: ${{ needs.change-detection.outputs.json_data }} 
     steps:
       - name: print-json-from-previos-job
         id: print-json-from-previos-job
         run: |
-          echo ${{ needs.change-detection.outputs.json_data }} 
+          echo ${{ fromJSON(needs.change-detection.outputs.json_data) }} 
     needs: change-detection
