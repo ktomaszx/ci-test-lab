@@ -52,10 +52,10 @@ jobs:
       ie_type: 'test' #read it from config file
       image_path: 'test' #read it from config file
       docker_image: ${{ fromJSON(needs.change-detection.outputs.json_data)[docker_image] }} 
-    # strategy:
-    #   fail-fast: false
-    #   matrix:
-    #     component: 
+    strategy:
+      fail-fast: false
+      matrix:
+        component: ${{ fromJSON(needs.change-detection.outputs.json_data) }}
     # steps:
     #   - name: print-json-from-previos-job
     #     id: print-json-from-previos-job
