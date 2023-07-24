@@ -50,7 +50,7 @@ jobs:
     with:
       ie_type: 'test' #read it from config file
       image_path: 'test' #read it from config file
-      docker_image: ${{ fromJSON(needs.change-detection.outputs.json_data)[params] }} 
+      docker_image: ${{ fromJSON(needs.change-detection.outputs.json_data.params) }} 
     # strategy:
     #   fail-fast: false
     #   matrix:
