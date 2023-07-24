@@ -59,5 +59,5 @@ jobs:
       - name: print-json-from-previos-job
         id: print-json-from-previos-job
         run: |
-          echo ${{ fromJSON(needs.change-detection.outputs.json_data).params }} 
+          echo ${{ fromJSON(needs.change-detection.outputs.json_data).params.docker_image }} 
     needs: change-detection
