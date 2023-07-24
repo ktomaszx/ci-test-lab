@@ -54,7 +54,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        component: ${{ fromJSON(needs.change-detection.outputs.json_data) }}
+        component: [docker_image]
     # steps:
     #   - name: print-json-from-previos-job
     #     id: print-json-from-previos-job
