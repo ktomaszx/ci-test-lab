@@ -34,9 +34,9 @@ jobs:
           with open("src/config.toml") as file:
             data = toml.load(file)
             json_data = json.dumps(data)
-            echo "json_data<<EOF" >> $GITHUB_OUTPUT
-            echo $json_data >> $GITHUB_OUTPUT
-            echo "EOF" >> $GITHUB_OUTPUT
+            print(json_data)')
+          echo "JSON TEST--------------"
+          echo "json_data=$JSON_DATA" >> "$GITHUB_OUTPUT"
       - name: Test-json
         id: test-json
         run: | 
