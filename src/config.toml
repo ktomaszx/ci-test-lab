@@ -1,4 +1,0 @@
-[params]
-docker_image = "test_docker_image"
-image_path = "aws.path.to.docker"
-ie_type = "dataset"

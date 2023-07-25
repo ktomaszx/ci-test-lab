@@ -1,0 +1,4 @@
+[module-a-params]
+docker_image = "test_docker_image-modul-a"
+image_path = "aws.path.to.docker"
+ie_type = "dataset"
