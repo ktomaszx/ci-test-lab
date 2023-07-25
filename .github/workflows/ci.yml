@@ -35,11 +35,12 @@ jobs:
           for root, dirs, files in os.walk("."):
             for name in files:
               if name.endswith("config.toml"):
+                component_name = os.path.basename(root)
                 with open(root+ "/" + name) as file:
                   data = toml.load(file)
                   json_data = json.dumps(data)
                   json_dict = json.loads(json_data)
-                  final_json.update(json_dict)
+                  final_json[component_name] = json_dict
           print(final_json)')
           echo $JSON_DATA
           echo "json_data=$JSON_DATA" >> "$GITHUB_OUTPUT"
@@ -48,22 +49,16 @@ jobs:
         run: | 
           echo ${{ steps.read-config.outputs.json_data }}
 
-  checks-matrix:
-    name: ${{ matrix.component }} operator checks
-    #runs-on: ubuntu-latest
-    uses: ./.github/workflows/checks.yml
-    if: (contains(needs.change-detection.outputs.operator-check-components, 'inference') || contains(needs.change-detection.outputs.operator-check-components, 'training'))
-    with:
-      ie_type: ${{ fromJSON(needs.change-detection.outputs.json_data)[matrix.component].ie_type }} 
-      image_path: ${{ fromJSON(needs.change-detection.outputs.json_data)[matrix.component].image_path }} 
-      docker_image: ${{ fromJSON(needs.change-detection.outputs.json_data)[matrix.component].docker_image }} 
-    strategy:
-      fail-fast: false
-      matrix:
-        component: ${{ fromJSON(needs.change-detection.outputs.operator-check-components)}} 
-    # steps:
-    #   - name: print-json-from-previos-job
-    #     id: print-json-from-previos-job
-    #     run: |
-    #       echo ${{ fromJSON(needs.change-detection.outputs.json_data.params.docker_image }} 
-    needs: change-detection
+  # checks-matrix:
+  #   name: ${{ matrix.component }} operator checks
+  #   uses: ./.github/workflows/checks.yml
+  #   if: (contains(needs.change-detection.outputs.operator-check-components, 'inference') || contains(needs.change-detection.outputs.operator-check-components, 'training'))
+  #   with:
+  #     ie_type: ${{ fromJSON(needs.change-detection.outputs.json_data)[matrix.component].ie_type }} 
+  #     image_path: ${{ fromJSON(needs.change-detection.outputs.json_data)[matrix.component].image_path }} 
+  #     docker_image: ${{ fromJSON(needs.change-detection.outputs.json_data)[matrix.component].docker_image }} 
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       component: ${{ fromJSON(needs.change-detection.outputs.operator-check-components)}} 
+  #   needs: change-detection
