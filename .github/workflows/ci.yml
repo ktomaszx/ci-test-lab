@@ -38,7 +38,13 @@ jobs:
             for name in files:
               print("TEST3")
               if name.endswith("config.toml"):
-                print("TEST4")')
+                print("TEST4")
+                with open(root+ "/" + name) as file:
+                  data = toml.load(file)
+                  print(data)
+                  json_data = json.dumps(data)
+                  json_dict = json.loads(json_data)
+                  final_json.update(json_dict)')
       - name: Test-json
         id: test-json
         run: | 
