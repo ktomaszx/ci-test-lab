@@ -54,8 +54,8 @@ jobs:
     uses: ./.github/workflows/checks.yml
     if: (contains(needs.change-detection.outputs.operator-check-components, 'inference') || contains(needs.change-detection.outputs.operator-check-components, 'training'))
     with:
-      ie_type: ${{ fromJSON(needs.change-detection.outputs.json_data).inference-params.ie_type }} 
-      image_path: ${{ fromJSON(needs.change-detection.outputs.json_data).inference-params.image_path }} 
+      ie_type: ${{ fromJSON(needs.change-detection.outputs.json_data)[matrix.component].ie_type }} 
+      image_path: ${{ fromJSON(needs.change-detection.outputs.json_data)[matrix.component].image_path }} 
       docker_image: ${{ fromJSON(needs.change-detection.outputs.json_data)[matrix.component].docker_image }} 
     strategy:
       fail-fast: false
