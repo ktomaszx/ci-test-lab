@@ -37,7 +37,10 @@ jobs:
               if name.endswith("config.toml"):
                 with open(root+ "/" + name) as file:
                   data = toml.load(file)
-                  json_data = json.dumps(data)')
+                  json_data = json.dumps(data)
+                  json_dict = json.loads(json_data)
+                  final_json.update(json_dict)
+          print(final_json)')
           echo $JSON_DATA
           echo "json_data=$JSON_DATA" >> "$GITHUB_OUTPUT"
       - name: Test-json
