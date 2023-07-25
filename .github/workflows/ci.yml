@@ -56,7 +56,7 @@ jobs:
     with:
       ie_type: ${{ fromJSON(needs.change-detection.outputs.json_data).inference-params.ie_type }} 
       image_path: ${{ fromJSON(needs.change-detection.outputs.json_data).inference-params.image_path }} 
-      docker_image: ${{ fromJSON(needs.change-detection.outputs.json_data)[matrix.component]-params.docker_image }} 
+      docker_image: ${{ fromJSON(needs.change-detection.outputs.json_data)[matrix.component].docker_image }} 
     strategy:
       fail-fast: false
       matrix:
