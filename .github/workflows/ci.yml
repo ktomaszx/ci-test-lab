@@ -49,7 +49,7 @@ jobs:
           echo ${{ steps.read-config.outputs.json_data }}
 
   checks-matrix:
-    name: ${{ matrix.component }} operator checks
+    name: ${{ matrix.component }}
     uses: ./.github/workflows/checks.yml
     if: (contains(needs.change-detection.outputs.operator-check-components, 'inference') || contains(needs.change-detection.outputs.operator-check-components, 'training'))
     with:
