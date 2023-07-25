@@ -1,4 +1,4 @@
-[module-b-params]
-docker_image = "test_docker_image-modul-b"
+[training-params]
+docker_image = "training_image-modul-b"
 image_path = "aws.path.to.docker"
-ie_type = "dataset"
+ie_type = "training"
