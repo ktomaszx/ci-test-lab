@@ -36,7 +36,7 @@ jobs:
             for name in files:
               if name.endswith('config.toml'):
                 print(os.path.join(root, name))
-                with open(root+ '/' + name) as file:
+                with open(root+ "/"" + name) as file:
                   data = toml.load(file)
                   json_data = json.dumps(data)
                   json_dict = json.loads(json_data)
