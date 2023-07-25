@@ -34,8 +34,11 @@ jobs:
           final_json = {}
           print("TEST1")
           for root, dirs, files in os.walk("."):
-            print("TEST2")')
-
+            print("TEST2")
+            for name in files:
+              print("TEST3")
+              if name.endswith("config.toml"):
+                print("TEST4")')
       - name: Test-json
         id: test-json
         run: | 
