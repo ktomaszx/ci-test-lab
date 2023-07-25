@@ -42,8 +42,8 @@ jobs:
                 with open(root+ "/" + name) as file:
                   data = toml.load(file)
                   print(data)
-                  json_data = json.dumps(data)
-                  print(json_data)')
+                  json_data = json.dumps(data)')
+          print(JSON_DATA)
           echo "json_data=$JSON_DATA" >> "$GITHUB_OUTPUT"
       - name: Test-json
         id: test-json
