@@ -24,8 +24,7 @@ jobs:
               'inference-operator', 'training-operator'
             ];
             const operatorChanges = changes.filter((change) => operatorCheck.includes(change));
-            const operatorNames = operatorChanges.map((element) => element.split('-')[0]);
-            core.setOutput('operator-check', operatorNames);
+            core.setOutput('operator-check', operatorChanges);
       - name: Read config file
         id: read-config
         run: | 
