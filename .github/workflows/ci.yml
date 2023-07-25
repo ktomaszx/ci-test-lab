@@ -34,19 +34,8 @@ jobs:
           final_json = {}
           print("TEST1")
           for root, dirs, files in os.walk("."):
-            print("TEST2")
-            for name in files:
-              print("TEST3")
-              if name.endswith("config.toml"):
-                print("TEST4")
-                print(os.path.join(root, name))
-                with open(root+ "/" + name) as file:
-                  data = toml.load(file)
-                  print(data)
-                  json_data = json.dumps(data)
-                  json_dict = json.loads(json_data)
-                  final_json.update(json_dict)')
-          echo "json_data=$JSON_DATA" >> "$GITHUB_OUTPUT"
+            print("TEST2")')
+
       - name: Test-json
         id: test-json
         run: | 
