@@ -1,9 +1,13 @@
 # This is a basic workflow to help you get started with Actions
 
 name: CI
-
-# Controls when the workflow will run
-on: push
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
 
 jobs:
   change-detection:
@@ -28,8 +32,11 @@ jobs:
       - name: Store build params
         id: build_params
         run: |
-          base_commit_sha=${{ github.event.before }}
-          echo $base_commit_sha
+          echo ${{ github.event.before }}
+          echo ${{ github.event.pull_request.head.sha }}
+          echo ${{ github.event.pull_request.base.sha }}
+          echo ${{ github.sha }}
+          echo ${{ github.event_name }}
       - name: Read config file
         id: read-config
         run: | 
