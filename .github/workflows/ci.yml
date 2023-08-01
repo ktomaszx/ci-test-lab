@@ -4,8 +4,11 @@ name: CI
 
 # Controls when the workflow will run
   pull_request:
+    branches:
+      - '**'
   push:
-
+    branches:
+      - '**'
 
 jobs:
   change-detection:
