@@ -25,6 +25,11 @@ jobs:
             ];
             const operatorChanges = changes.filter((change) => operatorCheck.includes(change));
             core.setOutput('operator-check', operatorChanges);
+      - name: Store build params
+        id: build_params
+        run: |
+          base_commit_sha=${{ github.event.pull_request.base.sha }}
+          echo $base_commit_sha
       - name: Read config file
         id: read-config
         run: | 
