@@ -28,7 +28,7 @@ jobs:
       - name: Store build params
         id: build_params
         run: |
-          base_commit_sha=${{ github.event.pull_request.base.sha }}
+          base_commit_sha=${{ github.event.before }}
           echo $base_commit_sha
       - name: Read config file
         id: read-config
