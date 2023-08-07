@@ -1,0 +1,19 @@
+# This is a basic workflow to help you get started with Actions
+
+name: ClosedPR
+
+# Controls when the workflow will run
+on:
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  after-pr:
+    name: Run after PR closed merged
+    runs-on: ubuntu-latest
+    steps:
+      - name: Store build params
+        id: build_params
+        run: |
+          echo "GOOOOOD"
