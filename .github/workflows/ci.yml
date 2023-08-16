@@ -32,7 +32,7 @@ jobs:
       - name: Store build params
         id: build_params
         run: |
-          ::group::aws ecr delete image
+          echo "::group::aws ecr delete image"
           echo ${{ github.event.before }}
           echo ${{ github.event.pull_request.head.sha }}
           echo ${{ github.event.pull_request.base.sha }}
