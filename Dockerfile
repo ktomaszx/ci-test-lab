@@ -1,5 +1,5 @@
 # Use a minimal base image
-FROM alpine:latest
+FROM summerwind/actions-runner-dind:v2.307.1-ubuntu-20.04
 
 # Specify the command to echo something
 # Install the AWS CLI v2
