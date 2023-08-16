@@ -9,4 +9,4 @@ RUN sudo curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "aws
     sudo rm -rf awscliv2.zip aws
 
 # Specify the command to run when the container starts
-CMD [ "aws", "--version" ]
+CMD [ "aws --version"]
