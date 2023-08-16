@@ -18,6 +18,7 @@ jobs:
       - name: Docker test
         id: docker_test
         run: |
+          echo "::group::aws ecr delete image"
           docker build -t my-echo-app .
-          docker run my-echo-app
-
+          docker run my-echo-app aws --version
+          echo "::endgroup::" 
