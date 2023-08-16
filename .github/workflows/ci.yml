@@ -38,7 +38,7 @@ jobs:
           echo ${{ github.event.pull_request.base.sha }}
           echo ${{ github.sha }}
           echo ${{ github.event_name }}
-          ::endgroup::
+          echo "::endgroup::"
       - name: Read config file
         id: read-config
         run: | 
