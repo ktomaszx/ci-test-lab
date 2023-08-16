@@ -15,8 +15,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Store build params
-        id: build_params
+      - name: Docker test
+        id: docker_test
         run: |
           docker build -t my-echo-app .
           docker run my-echo-app
