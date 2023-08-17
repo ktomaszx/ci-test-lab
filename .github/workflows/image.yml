@@ -20,8 +20,5 @@ jobs:
         run: |
           echo "::group::aws ecr delete image"
           docker build -t my-echo-app .
-          docker run my-echo-app -c "helm version" 
+          docker run my-echo-app -c "oras version" 
           echo "::endgroup::"
-          cat $context/Dockerfile
-          echo "XXDDDD"
-          cat Dockerfile
