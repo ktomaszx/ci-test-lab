@@ -20,5 +20,5 @@ jobs:
         run: |
           echo "::group::aws ecr delete image"
           docker build -t my-echo-app .
-          docker run my-echo-app -c "kubectl version" 
+          docker run my-echo-app -c "kubectl kustomize" 
           echo "::endgroup::" 
