@@ -5,9 +5,9 @@ USER root
 # Specify the command to echo something
 # Install the AWS CLI v2
 
-RUN apt-get update && \
-    apt-get install -y curl && \
-    rm -rf /var/lib/apt/lists/*
+# RUN apt-get update && \
+#     apt-get install -y curl && \
+#     rm -rf /var/lib/apt/lists/*
 
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
     unzip -q awscliv2.zip && \
@@ -26,11 +26,11 @@ RUN curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/s
     rm -rf get_helm.sh
 
 # Install oras
-RUN VERSION="1.0.1"
-    curl -LO "https://github.com/oras-project/oras/releases/download/v${VERSION}/oras_${VERSION}_linux_amd64.tar.gz"
-    mkdir -p oras-install/
-    tar -zxf oras_${VERSION}_*.tar.gz -C oras-install/
-    sudo mv oras-install/oras /usr/local/bin/
+RUN VERSION="1.0.1"  && \
+    curl -LO "https://github.com/oras-project/oras/releases/download/v${VERSION}/oras_${VERSION}_linux_amd64.tar.gz"  && \
+    mkdir -p oras-install/  && \
+    tar -zxf oras_${VERSION}_*.tar.gz -C oras-install/  && \
+    sudo mv oras-install/oras /usr/local/bin/  && \
     rm -rf oras_${VERSION}_*.tar.gz oras-install/
 
 # Specify the command to run when the container starts
