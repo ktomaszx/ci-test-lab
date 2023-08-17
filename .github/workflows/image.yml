@@ -21,4 +21,5 @@ jobs:
           echo "::group::aws ecr delete image"
           docker build -t my-echo-app .
           docker run my-echo-app -c "helm version" 
-          echo "::endgroup::" 
+          echo "::endgroup::"
+          echo $context
