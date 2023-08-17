@@ -20,10 +20,10 @@ RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/s
     mv kubectl /usr/local/bin/
 
 # Install helm
-RUN curl -LO "https://get.helm.sh/helm-v3.7.1-linux-amd64.tar.gz" && \
-    tar -zxvf helm-v3.7.1-linux-amd64.tar.gz && \
-    mv linux-amd64/helm /usr/local/bin/ && \
-    rm -rf linux-amd64 helm-v3.7.1-linux-amd64.tar.gz
+RUN curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+    chmod 700 get_helm.sh
+    ./get_helm.sh
+    rm -rf get_helm.sh
 
 # Specify the command to run when the container starts
 CMD [ "aws --version"]
