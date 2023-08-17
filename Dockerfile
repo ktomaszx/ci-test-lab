@@ -4,6 +4,11 @@ FROM summerwind/actions-runner-dind:v2.307.1-ubuntu-20.04
 USER root
 # Specify the command to echo something
 # Install the AWS CLI v2
+
+RUN apt-get update && \
+    apt-get install -y curl && \
+    rm -rf /var/lib/apt/lists/*
+
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
     unzip -q awscliv2.zip && \
     ./aws/install && \
