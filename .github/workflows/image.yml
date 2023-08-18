@@ -26,7 +26,7 @@ jobs:
           for tag in "${tagsArray[@]}"; do
             if [[ $counter -lt 5 ]]; then
               tagsToDelete+="imageTag=$tag "
-              ((counter++))
+              #((counter++))
             else
               echo "$tagsToDelete DELETED"
               counter=1
