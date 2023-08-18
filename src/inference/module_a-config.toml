@@ -1,5 +1,4 @@
 [check-params]  
-docker_image = "inference_image-modul-a"
-image_path = "aws.path.to.docker"
-ie_type = "inference"
-   
+docker_image = "inference_image-modul-a" 
+image_path = "aws.path.to.docker" 
+ie_type = "inference" 
