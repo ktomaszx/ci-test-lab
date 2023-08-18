@@ -18,7 +18,21 @@ jobs:
       - name: Docker test
         id: docker_test
         run: |
-          echo "::group::aws ecr delete image"
-          docker build -t my-echo-app .
-          docker run my-echo-app -c "oras version" 
-          echo "::endgroup::"
+          listofimages="x1 x2 x3 x4 x5 x6 x7"
+          counter=0
+          IFS=' ' read -ra tagsArray <<< $listofimages
+          tagsToDelete=""
+          counter=0
+          for tag in "${tagsArray[@]}"; do
+            if [[ $counter -lt 5 ]]; then
+              tagsToDelete+="imageTag=$tag "
+              ((counter++))
+            else
+              echo "$tagsToDelete DELETED"
+              counter=1
+              tagsToDelete="imageTag=$tag "
+            fi
+          done
+          if [[ ! -z "${tagsToDelete}" ]]; then
+            echo "$tagsToDelete DELETED"
+          fi
