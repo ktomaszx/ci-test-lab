@@ -20,5 +20,5 @@ jobs:
         run: |
           echo "::group::aws ecr delete image"
           docker build -t my-echo-app .
-          docker run my-echo-app -c "oras version" 
+          docker run my-echo-app -c "kustomize version" 
           echo "::endgroup::"
