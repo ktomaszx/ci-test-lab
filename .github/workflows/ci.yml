@@ -13,63 +13,11 @@ jobs:
   change-detection:
     name: Detect changes
     runs-on: ubuntu-latest
-    outputs:
-      operator-check-components: ${{ steps.filter_python_simple_check.outputs.operator-check }}
-      json_data: ${{ steps.read-config.outputs.json_data }}
     steps:
       - uses: actions/checkout@v3
-      - name: Filter changes for operator
-        id: filter_python_simple_check
-        uses: actions/github-script@v6
-        with:
-          script: |
-            const changes = ['training-operator', 'inference-operator'];
-            const operatorCheck = [
-              'inference-operator', 'training-operator'
-            ];
-            const operatorChanges = changes.filter((change) => operatorCheck.includes(change));
-            core.setOutput('operator-check', operatorChanges);
       - name: Store build params
         id: build_params
         run: |
-          echo ${{ github.event.before }}
-          echo ${{ github.event.pull_request.head.sha }}
-          echo ${{ github.event.pull_request.base.sha }}
-          echo ${{ github.sha }}
-          echo ${{ github.event_name }}
-      - name: Read config file
-        id: read-config
-        run: | 
-          python3 -m pip install toml
-          JSON_DATA=$(python3 -c 'import toml, json, os
-          final_json = {}
-          for root, dirs, files in os.walk("."):
-            for name in files:
-              if name.endswith("config.toml"):
-                component_name = os.path.basename(root)
-                with open(root+ "/" + name) as file:
-                  data = toml.load(file)
-                  json_data = json.dumps(data)
-                  json_dict = json.loads(json_data)
-                  final_json[component_name] = json_dict
-          print(final_json)')
-          echo $JSON_DATA
-          echo "json_data=$JSON_DATA" >> "$GITHUB_OUTPUT"
-      - name: Test-json
-        id: test-json
-        run: | 
-          echo ${{ steps.read-config.outputs.json_data }}
-
-  checks-matrix:
-    name: ${{ matrix.component }}
-    uses: ./.github/workflows/checks.yml
-    if: (contains(needs.change-detection.outputs.operator-check-components, 'inference') || contains(needs.change-detection.outputs.operator-check-components, 'training'))
-    with:
-      ie_type: ${{ fromJSON(needs.change-detection.outputs.json_data)[matrix.component].check-params.ie_type }} 
-      image_path: ${{ fromJSON(needs.change-detection.outputs.json_data)[matrix.component].check-params.image_path }} 
-      docker_image: ${{ fromJSON(needs.change-detection.outputs.json_data)[matrix.component].check-params.docker_image }} 
-    strategy:
-      fail-fast: false
-      matrix:
-        component: ${{ fromJSON(needs.change-detection.outputs.operator-check-components)}} 
-    needs: change-detection
+          promoted_sha=$(git ls-remote https://github.com/intel-innersource/applications.ai.geti.application-stack release-1.13.0 | awk '{ print $1 }')
+          branch_title="Update base and variants to $promoted_sha"
+          echo "branch_title=$branch_title" >> $GITHUB_ENV
