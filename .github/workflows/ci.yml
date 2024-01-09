@@ -18,6 +18,5 @@ jobs:
       - name: Store build params
         id: build_params
         run: |
-          promoted_sha=$(git ls-remote https://github.com/intel-innersource/applications.ai.geti.application-stack release-1.13.0 | awk '{ print $1 }')
-          branch_title="Update base and variants to $promoted_sha"
+          branch_title="Update base and variants to 472ada9232da3960e3c43d567bbec2c6fa27b81b 11e3a4fe343996b23e247baac6d4aa8c9b0f194f 79d8561098d832effa21a12ca8356a5047dbb08a"
           echo "branch_title=$branch_title" >> $GITHUB_ENV
