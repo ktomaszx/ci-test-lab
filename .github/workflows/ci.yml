@@ -22,4 +22,5 @@ jobs:
         env:
           PR_SHA: ${{ github.event.pull_request.merged == true && '' || github.event.pull_request.head.sha }} 
         run: |
-          echo ${PR_SHA}
+          echo "TEST"
+          echo ${{ github.event_name }}
