@@ -21,4 +21,4 @@ jobs:
       - name: Parameters check
         shell: bash
         run: | 
-          [[ ${{ inputs.vcluster_name }} =~ ^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$ ]] && echo : || (echo "did not match"; exit 1)
+          [[ ${{ inputs.vcluster_name }} =~ ^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$ ]] && : || (echo "did not match"; exit 1)
