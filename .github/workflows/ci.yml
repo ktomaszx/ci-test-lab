@@ -19,8 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Parameters check
-        run: |
-          lowercase_vcluster_name=$(echo ${{ inputs.vcluster_name }} | tr '[:upper:]' '[:lower:]')
-          if [ "${{ inputs.vcluster_name }}" != "$lowercase_vcluster_name" ]; then
-              echo "The string is not lowercase."
-          fi
+        shell: bash
+        run: | 
+          [[ ${{ inputs.vcluster_name }} =~ ^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$ ]] && echo "matched" || (echo "did not match"; echo 
+"test")
