@@ -13,18 +13,21 @@ jobs:
   check-pr:
     name: Check PR status
     runs-on: ubuntu-latest
+    outputs: 
+      vcluster_name: ${{ steps.convert_params.outputs.vcluster_name }}
     steps:
       - uses: actions/checkout@v3
 
       - name: Convert vcluster_name parameter
+        id: convert_params
         run: |
           vcluster_name_raw=${{ inputs.vcluster_name }}
           vcluster_name_corrected=$(echo $vcluster_name_raw | tr '[:upper:]' '[:lower:]' | tr '/' '-' | tr '_' '-' | tr -cd '[:alnum:]-')
-          echo "vcluster_name=$vcluster_name_corrected" >> $GITHUB_ENV
+          echo "vcluster_name=$vcluster_name_corrected" >> "$GITHUB_OUTPUT"
     
   create-preview-env:
     needs: check-pr
     name: create-preview-env
     uses: ./.github/workflows/checks.yml
     with:
-      vcluster_name: ${{ env.vcluster_name }}
+      vcluster_name: ${{ needs.check-pr.outputs.built-vcluster_name }}
