@@ -22,7 +22,7 @@ jobs:
         shell: bash
         run: | 
           vcluster_name=inputs.vcluster_name
-          if [[ ${#vcluster_name} -lt 10 ]] && [[ $vcluster_name =~ ^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$ ]]; then
+          if [[ $vcluster_name =~ ^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$ ]]; then
             :
           else
             echo -e "vcluster_name doesn't meet required crytiria. It must: \n-contain no more than 253 characters \n-contain only lowercase alphanumeric characters, '-' or '.' \n-start with an alphanumeric character \n-end with an alphanumeric characte"
