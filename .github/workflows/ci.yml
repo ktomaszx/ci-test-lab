@@ -30,4 +30,4 @@ jobs:
     name: create-preview-env
     uses: ./.github/workflows/checks.yml
     with:
-      vcluster_name: ${{ needs.check-pr.outputs.built-vcluster_name }}
+      vcluster_name: ${{ needs.check-pr.outputs.vcluster_name }}
