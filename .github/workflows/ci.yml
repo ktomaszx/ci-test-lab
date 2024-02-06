@@ -10,34 +10,21 @@ on:
         description: Name of vcluster
 
 jobs:
-  change-detection:
-    name: Detect changes
+  check-pr:
+    name: Check PR status
     runs-on: ubuntu-latest
-    outputs:
-      operator-check-components: ${{ steps.filter_python_simple_check.outputs.operator-check }}
-      json_data: ${{ steps.read-config.outputs.json_data }}
     steps:
       - uses: actions/checkout@v3
-      - name: Parameters check
-        shell: bash
-        run: | 
-          # vcluster_name=${{ inputs.vcluster_name }}
-          # if [[ ${#vcluster_name} -lt 10 ]] &&  [[ $vcluster_name =~ ^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$ ]]; then
-          #   :
-          # else
-          #   echo -e "vcluster_name doesn't meet required crytiria. It must: \n-contain no more than 253 characters \n-contain only lowercase alphanumeric characters, '-' or '.' \n-start with an alphanumeric character \n-end with an alphanumeric characte"
-          #   exit 1
-          # fi
-  create-preview-env:
-    runs-on: ubuntu-latest
-    name: create-preview-env
-    steps:
-      - uses: actions/checkout@v3
-      - name: Parameters check
+
+      - name: Convert vcluster_name parameter
         run: |
-          echo "vcluster_name=TEST_VCLUSTER" >> $GITHUB_ENV
-          cat .github/workflows/checks.yml
-      - name: create-preview-env
-        uses: ./.github/workflows/checks.yml
-        with:
-          vcluster_name: ${{ env.vcluster_name }}
+          vcluster_name_raw=${{ inputs.vcluster_name }}
+          vcluster_name_corrected=$(echo $vcluster_name_raw | tr '[:upper:]' '[:lower:]' | tr '/' '-' | tr '_' '-' | tr -cd '[:alnum:]-')
+          echo "vcluster_name=$vcluster_name_corrected" >> $GITHUB_ENV
+    
+  create-preview-env:
+    needs: check-pr
+    name: create-preview-env
+    uses: ./.github/workflows/checks.yml
+    with:
+      vcluster_name: ${{ env.vcluster_name }}
