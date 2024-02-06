@@ -36,7 +36,7 @@ jobs:
       - name: Parameters check
         run: |
           echo "vcluster_name=TEST_VCLUSTER" >> $GITHUB_ENV
-      - uses: ./.github/workflows/checks.yml
+      - uses: ./.github/workflows/onclosed.yml
         name: create-preview-env
         with:
           vcluster_name: ${{ env.vcluster_name }}
