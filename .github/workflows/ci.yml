@@ -2,12 +2,12 @@
 
 name: CI
 on:
-  pull_request:
-    branches:
-      - main
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      vcluster_name:
+        type: string
+        required: true
+        description: Name of vcluster
 
 jobs:
   change-detection:
@@ -18,9 +18,9 @@ jobs:
       json_data: ${{ steps.read-config.outputs.json_data }}
     steps:
       - uses: actions/checkout@v3
-      - name: Build modelmesh-adapter
-        env:
-          PR_SHA: ${{ github.event.pull_request.merged == true && '' || github.event.pull_request.head.sha }} 
+      - name: Parameters check
         run: |
-          echo "TEST"
-          echo ${{ github.event_name }}
+          lowercase_vcluster_name=$(echo ${{ inputs.vcluster_name }} | tr '[:upper:]' '[:lower:]')
+          if [ ${{ inputs.vcluster_name }} != "$lowercase_string" ]; then
+              echo "The string is not lowercase."
+          fi
