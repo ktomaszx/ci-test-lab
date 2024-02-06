@@ -3,16 +3,8 @@ name: Operator checks
 on:
   workflow_call:
     inputs:
-      ie_type:
+      vcluster_name:
         description: 'Import Export type - project or dataset'
-        type: string
-        required: true
-      image_path:
-        description: 'Path for docker image'
-        type: string
-        required: true
-      docker_image:
-        description: 'Name of the docker image'
         type: string
         required: true
 
@@ -25,8 +17,6 @@ jobs:
     steps:
       - name: Run black
         run: |
-          echo ${{ inputs.docker_image }}
-          echo ${{ inputs.image_path }}
-          echo ${{ inputs.ie_type }}
+          echo ${{ inputs.vcluster_name }}
     
 
