@@ -21,6 +21,6 @@ jobs:
       - name: Parameters check
         run: |
           lowercase_vcluster_name=$(echo ${{ inputs.vcluster_name }} | tr '[:upper:]' '[:lower:]')
-          if [ ${{ inputs.vcluster_name }} != "$lowercase_string" ]; then
+          if [ "${{ inputs.vcluster_name }}" != "$lowercase_vcluster_name" ]; then
               echo "The string is not lowercase."
           fi
