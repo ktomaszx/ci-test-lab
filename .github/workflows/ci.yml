@@ -9,7 +9,7 @@ on:
         required: true
         description: Name of vcluster
 env:
-  BRANCH_NAME: TEST
+  BRANCH_NAME: "TEST"
 jobs:
   check-pr:
     name: Check PR status
@@ -21,7 +21,7 @@ jobs:
 
       - name: Convert vcluster_name parameter
         env:
-          EMPTY: ${{ BRANCH_NAME }}
+          EMPTY: ${{ env.BRANCH_NAME }}
         id: convert_params
         run: |
           echo ${{ EMPTY }}
