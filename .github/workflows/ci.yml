@@ -26,3 +26,4 @@ jobs:
         id: convert_params
         run: |
           echo ${{ github.ref_name }}
+          echo ${{ github.head_ref }}
