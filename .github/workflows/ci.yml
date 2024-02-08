@@ -2,6 +2,7 @@
 
 name: CI
 on:
+  pull_request:
   workflow_dispatch:
     inputs:
       vcluster_name:
@@ -25,4 +26,5 @@ jobs:
           TARGET_REV: ${{ env.SHA == '' && env.BRANCH || env.SHA }}
         id: convert_params
         run: |
-          echo ${{ env.TARGET_REV }}
+          echo ${{ github.ref_name }}
+          echo ${{ github.head_ref }}
