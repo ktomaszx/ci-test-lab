@@ -25,4 +25,4 @@ jobs:
           TARGET_REV: ${{ env.SHA == '' && env.BRANCH || env.SHA }}
         id: convert_params
         run: |
-          echo ${{ env.TARGET_REV }}
+          echo ${{ github.ref_name }}
