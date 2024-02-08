@@ -24,4 +24,4 @@ jobs:
           EMPTY: ${{ env.BRANCH_NAME }}
         id: convert_params
         run: |
-          echo ${{ EMPTY }}
+          echo ${{ env.EMPTY }}
