@@ -22,7 +22,7 @@ jobs:
 
       - name: Convert vcluster_name parameter
         env:
-          TARGET_REV: ${{ env.SHA == '' && env.BRANCH || env.SHA) }}
+          TARGET_REV: ${{ env.SHA == '' && env.BRANCH || env.SHA }}
         id: convert_params
         run: |
           echo ${{ env.TARGET_REV }}
