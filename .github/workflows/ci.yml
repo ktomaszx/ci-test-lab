@@ -9,7 +9,8 @@ on:
         required: true
         description: Name of vcluster
 env:
-  BRANCH_NAME: "TEST"
+  SHA: "GITHUB_SHA"
+  BRANCH: "BRANCH_NAME"
 jobs:
   check-pr:
     name: Check PR status
@@ -21,7 +22,7 @@ jobs:
 
       - name: Convert vcluster_name parameter
         env:
-          EMPTY: ${{ env.BRANCH_NAME }}
+          TARGET_REV: ${{ if(ne(env.SHA, ''), env.BRANCH, env.SHA) }}
         id: convert_params
         run: |
-          echo ${{ env.EMPTY }}
+          echo ${{ env.TARGET_REV }}
