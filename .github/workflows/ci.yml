@@ -9,7 +9,7 @@ on:
         required: true
         description: Name of vcluster
 env:
-  SHA: "GITHUB_SHA"
+  SHA: ""
   BRANCH: "BRANCH_NAME"
 jobs:
   check-pr:
