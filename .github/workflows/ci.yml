@@ -8,7 +8,8 @@ on:
         type: string
         required: true
         description: Name of vcluster
-
+env:
+  BRANCH_NAME: TEST
 jobs:
   check-pr:
     name: Check PR status
@@ -19,15 +20,8 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Convert vcluster_name parameter
+        env:
+          EMPTY: ${{ BRANCH_NAME }}
         id: convert_params
         run: |
-          vcluster_name_raw=${{ inputs.vcluster_name }}
-          vcluster_name_corrected=$(echo $vcluster_name_raw | tr '[:upper:]' '[:lower:]' | tr '/' '-' | tr '_' '-' | tr -cd '[:alnum:]-')
-          echo "vcluster_name=$vcluster_name_corrected" >> "$GITHUB_OUTPUT"
-    
-  create-preview-env:
-    needs: check-pr
-    name: create-preview-env
-    uses: ./.github/workflows/checks.yml
-    with:
-      vcluster_name: ${{ needs.check-pr.outputs.vcluster_name }}
+          echo ${{ EMPTY }}
