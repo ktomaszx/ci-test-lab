@@ -25,5 +25,5 @@ jobs:
           TARGET_REV: ${{ env.SHA == '' && env.BRANCH || env.SHA }}
         id: convert_params
         run: |
-          set -o pipefail
+          #set -o pipefail
           make tests ; echo "LOG CHECK" ; ls -l
