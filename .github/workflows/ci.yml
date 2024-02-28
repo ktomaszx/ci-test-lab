@@ -23,4 +23,5 @@ jobs:
         run: |
           set -o pipefail
           make error
+          echo $?
           echo "XDDDD"
