@@ -27,6 +27,6 @@ jobs:
         run: |
           set -o pipefail
           echo $-
-          make error | tee test.log
+          make error
           ls -l
           cat test.log
