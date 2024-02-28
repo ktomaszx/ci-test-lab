@@ -26,8 +26,8 @@ jobs:
         id: convert_params
         shell: bash
         run: |
-          set +e -o pipefail
+          set -o pipefail
           echo $-
-          make tests
-          echo "LOG CHECK"
+          make error | tee test.log
           ls -l
+          cat test.log
