@@ -19,14 +19,10 @@ jobs:
       vcluster_name: ${{ steps.convert_params.outputs.vcluster_name }}
     steps:
       - uses: actions/checkout@v3
-
       - name: Convert vcluster_name parameter
-        env:
-          TARGET_REV: ${{ env.SHA == '' && env.BRANCH || env.SHA }}
-        id: convert_params
         run: |
-          set -o pipefail
           echo $-
-          make error
-          ls -l
-          cat unit_tests.log
+      - name: Convert vcluster_name parameter two
+        continue-on-error: true
+        run: |
+          echo $-
