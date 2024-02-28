@@ -20,9 +20,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Convert vcluster_name parameter
-        run: |
-          echo $-
-      - name: Convert vcluster_name parameter two
         continue-on-error: true
         run: |
-          echo $-
+          make error
