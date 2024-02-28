@@ -29,4 +29,4 @@ jobs:
           echo $-
           make error
           ls -l
-          cat test.log
+          cat unit_tests.log
