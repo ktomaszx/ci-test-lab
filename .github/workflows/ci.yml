@@ -25,3 +25,6 @@ jobs:
           BUILD_LOGS: ${{ runner.workspace }}/test_logs
         run: |
           echo $BUILD_LOGS
+          echo $(pwd)
+          cd $BUILD_LOGS
+          echo $(pwd)
