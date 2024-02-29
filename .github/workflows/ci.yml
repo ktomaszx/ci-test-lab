@@ -22,7 +22,7 @@ jobs:
       - name: Convert vcluster_name parameter
         working-directory: ./src
         env:
-          BUILD_LOGS: ${{ runner.workspace }}/test_logs
+          BUILD_LOGS: ${{ github.workspace }}/test_logs
         run: |
           echo $BUILD_LOGS
           echo $(pwd)
