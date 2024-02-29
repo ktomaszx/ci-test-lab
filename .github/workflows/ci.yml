@@ -20,8 +20,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Convert vcluster_name parameter
+        working-directory: /e2e
+        env:
+          BUILD_LOGS: ${{ env.TEST_LOG_DIR}}
         run: |
-          set -o pipefail
-          make error
-          echo $?
-          echo "XDDDD"
+          echo $BUILD_LOGS
