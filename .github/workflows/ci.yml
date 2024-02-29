@@ -20,6 +20,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Convert vcluster_name parameter
+        working-directory: ./src
+        env:
+          BUILD_LOGS: ${{ runner.workspace }}/test_logs
         run: |
-          echo $(pwd)
-          ls -l
+          echo $BUILD_LOGS
