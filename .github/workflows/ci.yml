@@ -4,27 +4,21 @@ name: CI
 on:
   workflow_dispatch:
     inputs:
-      vcluster_name:
+      test:
         type: string
-        required: true
-        description: Name of vcluster
-env:
-  SHA: ""
-  BRANCH: "BRANCH_NAME"
+        required: false
+        description: Test
 jobs:
   check-pr:
-    name: Check PR status
+    name: Test notification
     runs-on: ubuntu-latest
-    outputs: 
-      vcluster_name: ${{ steps.convert_params.outputs.vcluster_name }}
     steps:
       - uses: actions/checkout@v3
-      - name: Convert vcluster_name parameter
-        working-directory: ./src
-        env:
-          BUILD_LOGS: ${{ github.workspace }}/test_logs
-        run: |
-          echo $BUILD_LOGS
-          echo $(pwd)
-          cd $BUILD_LOGS
-          echo $(pwd)
+      - name: Notify dedicated teams channel
+        uses: jdcargile/ms-teams-notification@v1.4
+        with:
+          github-token: ${{ github.token }}
+          ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
+          notification-summary: Test notification message 
+          notification-color: 17a2b8
+          verbose-logging: true
