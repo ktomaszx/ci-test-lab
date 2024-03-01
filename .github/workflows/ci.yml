@@ -13,9 +13,9 @@ jobs:
     name: Test notification
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Notify dedicated teams channel
-        uses: jdcargile/ms-teams-notification@v1.3
+        uses: jdcargile/ms-teams-notification@v1.4
         with:
           github-token: ${{ github.token }}
           ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
