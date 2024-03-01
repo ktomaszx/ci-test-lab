@@ -19,8 +19,8 @@ jobs:
         with:
           github-token: ${{ github.token }}
           ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
-          notification-summary: Test notification message 
-          notification-color: '#ffc107'
+          notification-summary: Validation Report
+          notification-color: 'ffc107'
           verbose-logging: true
   # without_optional_params:
   #   name: One with little info
