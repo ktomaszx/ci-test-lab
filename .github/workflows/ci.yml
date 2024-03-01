@@ -9,29 +9,29 @@ on:
         required: false
         description: Test
 jobs:
-  # check-pr:
-  #   name: Test notification
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - name: Notify dedicated teams channel
-  #       uses: jdcargile/ms-teams-notification@v1.4
-  #       with:
-  #         github-token: ${{ github.token }}
-  #         ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
-  #         notification-summary: Test notification message 
-  #         notification-color: ffc107
-  #         verbose-logging: true
-  without_optional_params:
-    name: One with little info
+  check-pr:
+    name: Test notification
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Microsoft Teams Notification
-        uses: skitionek/notify-microsoft-teams@master
-        if: always()
+      - name: Notify dedicated teams channel
+        uses: jdcargile/ms-teams-notification@v1.4
         with:
-          webhook_url: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
-          needs: ${{ toJson(needs) }}
-          job: ${{ toJson(job) }}
-          steps: ${{ toJson(steps) }}
+          github-token: ${{ github.token }}
+          ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
+          notification-summary: Test notification message 
+          notification-color: '#ffc107'
+          verbose-logging: true
+  # without_optional_params:
+  #   name: One with little info
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Microsoft Teams Notification
+  #       uses: skitionek/notify-microsoft-teams@master
+  #       if: always()
+  #       with:
+  #         webhook_url: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
+  #         needs: ${{ toJson(needs) }}
+  #         job: ${{ toJson(job) }}
+  #         steps: ${{ toJson(steps) }}
