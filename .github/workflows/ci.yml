@@ -50,7 +50,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: MS Teams
         uses: jdcargile/ms-teams-notification@v1.4
-        if: success()
+        if: always() && success()
         with:
           github-token: ${{ github.token }} # this will use the runner's token.
           ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
@@ -65,7 +65,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: MS Teams
         uses: jdcargile/ms-teams-notification@v1.4
-        if: failure()
+        if: always() && failure()
         with:
           github-token: ${{ github.token }} # this will use the runner's token.
           ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
