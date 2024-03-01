@@ -43,6 +43,7 @@ jobs:
     - name: Try to fail
       run: exit 1
   ms-teams-notification-success:
+    needs: job-1
     name: MS Teams Notification - Success
     runs-on: ubuntu-latest
     steps:
@@ -57,6 +58,7 @@ jobs:
           notification-color: 17a2b8
           verbose-logging: true
   ms-teams-notification-failure:
+    needs: job-1
     name: MS Teams Notification - Failure
     runs-on: ubuntu-latest
     steps:
