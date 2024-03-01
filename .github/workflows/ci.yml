@@ -9,19 +9,19 @@ on:
         required: false
         description: Test
 jobs:
-  check-pr:
-    name: Test notification
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Notify dedicated teams channel
-        uses: jdcargile/ms-teams-notification@v1.4
-        with:
-          github-token: ${{ github.token }}
-          ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
-          notification-summary: Validation Report
-          notification-color: 'ffc107'
-          verbose-logging: true
+  # check-pr:
+  #   name: Test notification
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Notify dedicated teams channel
+  #       uses: jdcargile/ms-teams-notification@v1.4
+  #       with:
+  #         github-token: ${{ github.token }}
+  #         ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
+  #         notification-summary: Validation Report
+  #         notification-color: 'ffc107'
+  #         verbose-logging: true
   # without_optional_params:
   #   name: One with little info
   #   runs-on: ubuntu-latest
@@ -34,4 +34,62 @@ jobs:
   #         webhook_url: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
   #         needs: ${{ toJson(needs) }}
   #         job: ${{ toJson(job) }}
-  #         steps: ${{ toJson(steps) }}
+  #         steps: ${{ toJson(steps) }}  
+  job-1:
+    name: fail-job
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Try to fail
+      run: exit 1
+  ms-teams-notification-success:
+    name: MS Teams Notification - Success
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Microsoft Teams Notification - success
+        uses: jdcargile/ms-teams-notification@v1.4
+        if: success()
+        with:
+          github-token: ${{ github.token }} # this will use the runner's token.
+          ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
+          notification-summary: Your custom notification message 
+          notification-color: 17a2b8
+          verbose-logging: true
+  ms-teams-notification-failure:
+    name: MS Teams Notification - Failure
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Microsoft Teams Notification - success
+        uses: jdcargile/ms-teams-notification@v1.4
+        if: failure()
+        with:
+          github-token: ${{ github.token }} # this will use the runner's token.
+          ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
+          notification-summary: Your custom notification message 
+          notification-color: 47a2b1
+          verbose-logging: true
+  # ms-teams-notification:
+  #   name: MS Teams Notification
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Microsoft Teams Notification - success
+  #       uses: jdcargile/ms-teams-notification@v1.4
+  #       if: success()
+  #       with:
+  #         github-token: ${{ github.token }} # this will use the runner's token.
+  #         ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
+  #         notification-summary: Your custom notification message 
+  #         notification-color: 17a2b8
+  #         verbose-logging: true
+  #     - name: Microsoft Teams Notification - failure
+  #       uses: jdcargile/ms-teams-notification@v1.4
+  #       if: failure()
+  #       with:
+  #         github-token: ${{ github.token }} # this will use the runner's token.
+  #         ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
+  #         notification-summary: Your custom notification message 
+  #         notification-color: 17a2b8
+  #         verbose-logging: true
