@@ -48,7 +48,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Microsoft Teams Notification - success
+      - name: MS Teams
         uses: jdcargile/ms-teams-notification@v1.4
         if: success()
         with:
@@ -63,7 +63,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Microsoft Teams Notification - success
+      - name: MS Teams
         uses: jdcargile/ms-teams-notification@v1.4
         if: failure()
         with:
