@@ -7,5 +7,4 @@ jobs:
   test:
     name: "Run test"
     uses: ./.github/workflows/onclosed.yml
-    secrets:
-      MS_TEAMS_WEBHOOK_URI: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
+    secrets: inherit
