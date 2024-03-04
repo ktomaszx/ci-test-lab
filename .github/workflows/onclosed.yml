@@ -3,6 +3,9 @@
 name: CI
 on:
   workflow_call:
+    secrets:
+      MS_TEAMS_WEBHOOK_URI:
+        required: true
 jobs:
   job-1:
     name: success-job
