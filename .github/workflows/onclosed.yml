@@ -45,8 +45,8 @@ jobs:
       - name: MS Teams
         uses: jdcargile/ms-teams-notification@v1.4
         with:
-          github-token: ${{ github.token }}
           ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
+          github-token: ${{ github.token }}
           notification-summary: "Triggering workflow: ${{ github.event.workflow }}" 
           notification-color: 47a2b1
           verbose-logging: true
