@@ -28,7 +28,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: MS Teams
-        run: echo ${{ github.event }}
+        run: echo ${{ toJson(github.event) }}
         # uses: jdcargile/ms-teams-notification@v1.4
         # with:
         #   github-token: ${{ github.token }} # this will use the runner's token.
@@ -44,7 +44,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: MS Teams
-        run: echo ${{ github.event }}
+        run: echo ${{ toJson(github.event) }}
         # uses: jdcargile/ms-teams-notification@v1.4
         # with:
         #   github-token: ${{ github.token }} # this will use the runner's token.
