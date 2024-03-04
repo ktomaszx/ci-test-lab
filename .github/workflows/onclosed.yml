@@ -46,12 +46,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: MS Teams
-        run: |
-          run: echo ${{ toJson(github) }}
-        # uses: jdcargile/ms-teams-notification@v1.4
-        # with:
-        #   github-token: ${{ github.token }} # this will use the runner's token.
-        #   ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
-        #   notification-summary: "Triggering workflow: ${{ toJson(github.event.workflow) }}" 
-        #   notification-color: 47a2b1
-        #   verbose-logging: true
+        uses: jdcargile/ms-teams-notification@v1.4
+        with:
+          github-token: ${{ github.token }} # this will use the runner's token.
+          ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
+          notification-summary: "Triggering workflow: ${{ github.event.workflow }}" 
+          notification-color: 47a2b1
+          verbose-logging: true
