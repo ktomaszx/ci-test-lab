@@ -27,13 +27,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: MS Teams
-        uses: jdcargile/ms-teams-notification@v1.4
-        with:
-          github-token: ${{ github.token }} # this will use the runner's token.
-          ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
-          notification-summary: "Triggering workflow: ${{ github.event.workflow }}"
-          notification-color: 17a2b8
-          verbose-logging: true
+        run: echo "Hello"
+        # uses: jdcargile/ms-teams-notification@v1.4
+        # with:
+        #   github-token: ${{ github.token }} # this will use the runner's token.
+        #   ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
+        #   notification-summary: "Triggering workflow: ${{ github.event.workflow }}"
+        #   notification-color: 17a2b8
+        #   verbose-logging: true
   ms-teams-notification-failure:
     needs: job-2
     name: MS Teams Notification - Failure
@@ -42,13 +43,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: MS Teams
-        uses: jdcargile/ms-teams-notification@v1.4
-        with:
-          github-token: ${{ github.token }} # this will use the runner's token.
-          ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
-          notification-summary: "Triggering workflow: ${{ github.event.workflow }}" 
-          notification-color: 47a2b1
-          verbose-logging: true
+        run: echo "Hello"
+        # uses: jdcargile/ms-teams-notification@v1.4
+        # with:
+        #   github-token: ${{ github.token }} # this will use the runner's token.
+        #   ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
+        #   notification-summary: "Triggering workflow: ${{ github.event.workflow }}" 
+        #   notification-color: 47a2b1
+        #   verbose-logging: true
   
   #         notification-color: 17a2b8
   #         verbose-logging: true
