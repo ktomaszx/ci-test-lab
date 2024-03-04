@@ -9,16 +9,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: Try to fail
-      run: exit 1
+    - name: Success step
+      run: echo "xD"
   job-2:
     needs: job-1
     name: fail-job
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: Try to fail
-      run: echo "Hello"
+    - name: Fail step
+      run: exit 1
+  
   ms-teams-notification-success:
     needs: job-2
     name: MS Teams Notification - Success
@@ -27,7 +28,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: MS Teams
-        run: echo "Hello"
+        run: echo ${{ github.event.workflow }}"
         # uses: jdcargile/ms-teams-notification@v1.4
         # with:
         #   github-token: ${{ github.token }} # this will use the runner's token.
@@ -43,7 +44,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: MS Teams
-        run: echo "Hello"
+        run: echo ${{ github.event.workflow }}"
         # uses: jdcargile/ms-teams-notification@v1.4
         # with:
         #   github-token: ${{ github.token }} # this will use the runner's token.
