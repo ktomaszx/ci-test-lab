@@ -2,12 +2,7 @@
 
 name: CI
 on:
-  workflow_dispatch:
-    inputs:
-      test:
-        type: string
-        required: false
-        description: Test
+  push:
 jobs:
   test:
     name: "Run test"
