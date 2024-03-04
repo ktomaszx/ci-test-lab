@@ -30,7 +30,7 @@ jobs:
       - name: MS Teams
         run: |
           echo ${{ toJson(github.event.workflow) }}
-          echo ${{ github.event.workflow.name }}
+          echo ${{ github.event.workflow_run.name }}
         # uses: jdcargile/ms-teams-notification@v1.4
         # with:
         #   github-token: ${{ github.token }} # this will use the runner's token.
@@ -48,7 +48,7 @@ jobs:
       - name: MS Teams
         run: |
           echo ${{ toJson(github.event.workflow) }}
-          echo ${{ github.event.workflow.name }}
+          echo ${{ github.event.workflow_run.name }}
         # uses: jdcargile/ms-teams-notification@v1.4
         # with:
         #   github-token: ${{ github.token }} # this will use the runner's token.
