@@ -4,19 +4,8 @@ name: CI
 on:
   workflow_dispatch:
 jobs:
-  ms-teams-notification-failure:
-    name: MS Teams Notification - Failure
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: MS Teams
-        uses: jdcargile/ms-teams-notification@v1.4
-        with:
-          ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
-          github-token: ${{ github.token }}
-          notification-summary: "Triggering workflow: ${{ github.event.workflow }}" 
-          notification-color: 47a2b1
-          verbose-logging: true
   test:
     name: "Run test"
     uses: ./.github/workflows/onclosed.yml
+    secrets:
+      MS_TEAMS_WEBHOOK_URI: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
