@@ -47,7 +47,6 @@ jobs:
       - uses: actions/checkout@v4
       - name: MS Teams
         run: |
-          echo ${{ toJson(github.event.workflow.name) }}
           echo ${{ github.event.workflow.name }}
         # uses: jdcargile/ms-teams-notification@v1.4
         # with:
@@ -56,6 +55,3 @@ jobs:
         #   notification-summary: "Triggering workflow: ${{ toJson(github.event.workflow) }}" 
         #   notification-color: 47a2b1
         #   verbose-logging: true
-  
-  #         notification-color: 17a2b8
-  #         verbose-logging: true
