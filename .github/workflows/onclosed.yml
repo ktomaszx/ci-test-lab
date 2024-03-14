@@ -36,7 +36,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Success step
-      run: echo "xD"
+      run: exit 1
   
   ms-teams-notification-success:
     needs: job-2
