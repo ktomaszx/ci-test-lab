@@ -29,7 +29,6 @@ jobs:
     - name: Success step
       run: echo "xD"
   job-2:
-    if: "${{ inputs.skip == true }}"
     needs: 
       - job-1
     name: fail-job
