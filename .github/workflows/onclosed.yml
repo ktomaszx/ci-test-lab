@@ -31,7 +31,6 @@ jobs:
   job-2:
     needs: 
       - job-1
-      - skipped-job
     name: fail-job
     runs-on: ubuntu-latest
     steps:
@@ -43,7 +42,7 @@ jobs:
     needs: job-2
     name: MS Teams Notification - Success
     runs-on: ubuntu-latest
-    if: always() && success()
+    if: always() && success() && github.event.workflow == ".github/workflows/ci.yml"
     steps:
       - uses: actions/checkout@v4
       - name: MS Teams
@@ -58,7 +57,7 @@ jobs:
     needs: job-2
     name: MS Teams Notification - Failure
     runs-on: ubuntu-latest
-    if: always() && failure()
+    if: always() && failure() && github.event.workflow == ".github/workflows/ci.yml"
     steps:
       - uses: actions/checkout@v4
       - name: MS Teams
