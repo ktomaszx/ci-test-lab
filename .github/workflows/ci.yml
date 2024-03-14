@@ -8,3 +8,5 @@ jobs:
     name: "Run test"
     uses: ./.github/workflows/onclosed.yml
     secrets: inherit
+    with:
+      env_name: daily-test-123
