@@ -52,12 +52,11 @@ jobs:
     needs: job-2
     name: MS Teams Notification
     runs-on: ubuntu-latest
-    if: always()
+    if: ${{ always() && github.event.workflow != '.github/workflows/onclosed.yml' }}
     steps:
       - name: Notf color
         id: col
         run: |
-          echo ${{ github.event.workflow }}
           if [ "${{ needs.job-2.result }}" == "success" ]; then
             echo "color=17a2b8" >> $GITHUB_OUTPUT
           fi
