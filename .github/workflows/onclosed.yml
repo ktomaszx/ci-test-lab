@@ -3,9 +3,11 @@
 name: CI
 on:
   workflow_call:
-    # secrets:
-    #   MS_TEAMS_WEBHOOK_URI:
-    #     required: true
+    inputs:
+      env_name:
+        type: string
+        description: "test"
+        required: true
 jobs:
   job-1:
     name: success-job
@@ -35,7 +37,7 @@ jobs:
         with:
           github-token: ${{ github.token }} # this will use the runner's token.
           ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
-          notification-summary: "Triggering workflow: ${{ toJson(github.event.workflow) }}"
+          notification-summary: ${{ github.event.workflow }} - ${{ inputs.env_name }}
           notification-color: 17a2b8
           verbose-logging: true
   ms-teams-notification-failure:
@@ -50,6 +52,6 @@ jobs:
         with:
           ms-teams-webhook-uri: "${{ secrets.MS_TEAMS_WEBHOOK_URI }}"
           github-token: ${{ github.token }}
-          notification-summary: "Triggering workflow: ${{ github.event.workflow }}" 
+          notification-summary: ${{ github.event.workflow }} - ${{ inputs.env_name }}
           notification-color: 47a2b1
           verbose-logging: true
