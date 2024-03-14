@@ -11,7 +11,7 @@ on:
       skip:
         type: boolean
         description: "test"
-        default: True
+        default: false
 
 jobs:
   skipped-job:
