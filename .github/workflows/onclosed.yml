@@ -29,6 +29,7 @@ jobs:
     - name: Success step
       run: echo "xD"
   job-2:
+    if: "${{ inputs.skip == true }}"
     needs: 
       - job-1
     name: fail-job
@@ -42,7 +43,7 @@ jobs:
     needs: job-2
     name: MS Teams Notification - Success
     runs-on: ubuntu-latest
-    if: ${{ always() && (github.event.workflow == '.github/workflows/xd.yml' || github.event.workflow == '.github/workflows/ci.yml') }}
+    if: ${{ github.event.workflow == '.github/workflows/xd.yml' || github.event.workflow == '.github/workflows/ci.yml' }}
     steps:
       - name: Notf color
         id: col
