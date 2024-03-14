@@ -49,6 +49,7 @@ jobs:
         run: |
           if [ "${{ needs.job-2.result }}" == "success" ]; then
             echo "color=17a2b8" >> $GITHUB_OUTPUT
+          fi
           if [ "${{ needs.job-2.result }}" == "failure" ]; then
             echo "color=47a2b1" >> $GITHUB_OUTPUT
           fi
