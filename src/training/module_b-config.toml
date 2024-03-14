@@ -2,3 +2,4 @@
 docker_image = "training_image-modul-b"
 image_path = "aws.path.to.docker"
 ie_type = "training" 
+ 
