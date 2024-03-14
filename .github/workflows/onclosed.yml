@@ -42,7 +42,7 @@ jobs:
     needs: job-2
     name: MS Teams Notification - Success
     runs-on: ubuntu-latest
-    if: always() && success() && ${{ github.event.workflow == '.github/workflows/test.yml' }}
+    if: always() && success() && ${{ github.event == 'pull_request' }}
     steps:
       - uses: actions/checkout@v4
       - name: MS Teams
