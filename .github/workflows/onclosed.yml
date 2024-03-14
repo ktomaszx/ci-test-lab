@@ -2,6 +2,16 @@
 
 name: CI
 on:
+  workflow_dispatch:
+    inputs:
+      env_name:
+        type: string
+        description: "test"
+        required: true
+      skip:
+        type: boolean
+        description: "test"
+        default: false
   workflow_call:
     inputs:
       env_name:
@@ -42,11 +52,12 @@ jobs:
     needs: job-2
     name: MS Teams Notification
     runs-on: ubuntu-latest
-    if: ${{ always() && (github.event.workflow == '.github/workflows/xd.yml' || github.event.workflow == '.github/workflows/ci.yml') }}
+    if: always()
     steps:
       - name: Notf color
         id: col
         run: |
+          echo ${{ github.event_name }}
           if [ "${{ needs.job-2.result }}" == "success" ]; then
             echo "color=17a2b8" >> $GITHUB_OUTPUT
           fi
