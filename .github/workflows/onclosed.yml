@@ -29,13 +29,15 @@ jobs:
     - name: Success step
       run: echo "xD"
   job-2:
-    needs: job-1
+    needs: 
+      - job-1
+      - skipped-job
     name: fail-job
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: Fail step
-      run: exit 1
+    - name: Success step
+      run: echo "xD"
   
   ms-teams-notification-success:
     needs: job-2
