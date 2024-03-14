@@ -40,9 +40,9 @@ jobs:
   
   ms-teams-notification-success:
     needs: job-2
-    name: MS Teams Notification - Success
+    name: MS Teams Notification
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow == '.github/workflows/xd.yml' || github.event.workflow == '.github/workflows/ci.yml' }}
+    if: ${{ always() && (github.event.workflow == '.github/workflows/xd.yml' || github.event.workflow == '.github/workflows/ci.yml') }}
     steps:
       - name: Notf color
         id: col
