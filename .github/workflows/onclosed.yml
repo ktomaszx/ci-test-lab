@@ -8,7 +8,19 @@ on:
         type: string
         description: "test"
         required: true
+      skip:
+        type: boolean
+        description: "test"
+        default: True
+
 jobs:
+  skipped-job:
+    name: SKIPP
+    if: "${{ inputs.skip == true }}"
+    runs-on: ubuntu-latest
+    steps:
+    - name: Skipped
+      run: echo "xD"
   job-1:
     name: success-job
     runs-on: ubuntu-latest
