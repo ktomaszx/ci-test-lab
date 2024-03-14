@@ -44,6 +44,14 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ always() && success() && (github.event.workflow == '.github/workflows/xd.yml' || github.event.workflow == '.github/workflows/ci.yml') }}
     steps:
+      - name: Notf color
+      - id: col
+        run: |
+          if [ "${{ needs.job-2.result }}" == "success" ]; then
+            echo "color=17a2b8" >> $GITHUB_OUTPUT
+          if [ "${{ needs.job-2.result }}" == "failure" ]; then
+            echo "color=47a2b1" >> $GITHUB_OUTPUT
+          fi
       - uses: actions/checkout@v4
       - name: MS Teams
         uses: jdcargile/ms-teams-notification@v1.4
@@ -51,20 +59,20 @@ jobs:
           github-token: ${{ github.token }} # this will use the runner's token.
           ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
           notification-summary: ${{ github.event.workflow }} - ${{ inputs.env_name }}
-          notification-color: 17a2b8
+          notification-color: ${{ steps.col.outputs.color }}
           verbose-logging: true
-  ms-teams-notification-failure:
-    needs: job-2
-    name: MS Teams Notification - Failure
-    runs-on: ubuntu-latest
-    if: always() && failure()
-    steps:
-      - uses: actions/checkout@v4
-      - name: MS Teams
-        uses: jdcargile/ms-teams-notification@v1.4
-        with:
-          ms-teams-webhook-uri: "${{ secrets.MS_TEAMS_WEBHOOK_URI }}"
-          github-token: ${{ github.token }}
-          notification-summary: ${{ github.event.workflow }} - ${{ inputs.env_name }}
-          notification-color: 47a2b1
-          verbose-logging: true
+  # ms-teams-notification-failure:
+  #   needs: job-2
+  #   name: MS Teams Notification - Failure
+  #   runs-on: ubuntu-latest
+  #   if: always() && failure()
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: MS Teams
+  #       uses: jdcargile/ms-teams-notification@v1.4
+  #       with:
+  #         ms-teams-webhook-uri: "${{ secrets.MS_TEAMS_WEBHOOK_URI }}"
+  #         github-token: ${{ github.token }}
+  #         notification-summary: ${{ github.event.workflow }} - ${{ inputs.env_name }}
+  #         notification-color: 47a2b1
+  #         verbose-logging: true
