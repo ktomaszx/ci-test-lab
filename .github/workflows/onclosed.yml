@@ -42,7 +42,7 @@ jobs:
     needs: job-2
     name: MS Teams Notification - Success
     runs-on: ubuntu-latest
-    if: always() && success() && github.event.workflow == ".github/workflows/ci.yml"
+    if: always() && success()
     steps:
       - uses: actions/checkout@v4
       - name: MS Teams
@@ -57,7 +57,7 @@ jobs:
     needs: job-2
     name: MS Teams Notification - Failure
     runs-on: ubuntu-latest
-    if: always() && failure() && github.event.workflow == ".github/workflows/ci.yml"
+    if: always() && failure()
     steps:
       - uses: actions/checkout@v4
       - name: MS Teams
