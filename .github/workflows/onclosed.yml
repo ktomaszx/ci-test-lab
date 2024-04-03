@@ -57,7 +57,7 @@ jobs:
       - name: Notf color
         id: col
         run: |
-         vcluster_name=cvs-134341-pr-preview-env-create-pr
+         vcluster_name=cvs-134341-pr-preview-env-create-pre
          if [[ ${#vcluster_name} -le 35 ]] &&  [[ $vcluster_name =~ ^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$ ]]; then
            echo "OKEY"
          else
