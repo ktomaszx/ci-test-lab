@@ -57,12 +57,19 @@ jobs:
       - name: Notf color
         id: col
         run: |
-          if [ "${{ needs.job-2.result }}" == "success" ]; then
-            echo "color=17a2b8" >> $GITHUB_OUTPUT
-          fi
-          if [ "${{ needs.job-2.result }}" == "failure" ]; then
-            echo "color=47a2b1" >> $GITHUB_OUTPUT
-          fi
+         vcluster_name=cvs-134341-pr-preview-env-create-pr
+         if [[ ${#vcluster_name} -lt 35 ]] &&  [[ $vcluster_name =~ ^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$ ]]; then
+           echo "OKEY"
+         else
+           echo -e "vcluster_name doesn't meet required crytiria."
+           exit 1
+         fi
+          # if [ "${{ needs.job-2.result }}" == "success" ]; then
+          #   echo "color=17a2b8" >> $GITHUB_OUTPUT
+          # fi
+          # if [ "${{ needs.job-2.result }}" == "failure" ]; then
+          #   echo "color=47a2b1" >> $GITHUB_OUTPUT
+          # fi
       - uses: actions/checkout@v4
       - name: MS Teams
         uses: jdcargile/ms-teams-notification@v1.4
