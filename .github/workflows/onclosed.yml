@@ -63,12 +63,13 @@ jobs:
           if [ "${{ needs.job-2.result }}" == "failure" ]; then
             echo "color=47a2b1" >> $GITHUB_OUTPUT
           fi
-      - uses: actions/checkout@v4
-      - name: MS Teams
-        uses: jdcargile/ms-teams-notification@v1.4
-        with:
-          github-token: ${{ github.token }} # this will use the runner's token.
-          ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
-          notification-summary: ${{ github.event.workflow }} - ${{ inputs.env_name }}
-          notification-color: ${{ steps.col.outputs.color }}
-          verbose-logging: true
+          echo "Test github step summary" >> $GITHUB_STEP_SUMMARY
+      # - uses: actions/checkout@v4
+      # - name: MS Teams
+      #   uses: jdcargile/ms-teams-notification@v1.4
+      #   with:
+      #     github-token: ${{ github.token }} # this will use the runner's token.
+      #     ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
+      #     notification-summary: ${{ github.event.workflow }} - ${{ inputs.env_name }}
+      #     notification-color: ${{ steps.col.outputs.color }}
+      #     verbose-logging: true
