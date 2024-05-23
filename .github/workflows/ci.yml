@@ -19,6 +19,7 @@ jobs:
     with:
       env_name: daily-test-123
   test2:
+    needs: test
     name: Check ENV
     runs-on: ubuntu-latest
     steps:
