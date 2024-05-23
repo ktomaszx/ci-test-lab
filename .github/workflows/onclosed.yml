@@ -24,13 +24,6 @@ on:
         default: false
 
 jobs:
-  skipped-job:
-    name: SKIPP
-    if: "${{ inputs.skip == true }}"
-    runs-on: ubuntu-latest
-    steps:
-    - name: Skipped
-      run: echo "xD"
   job-1:
     name: success-job
     runs-on: ubuntu-latest
@@ -48,8 +41,8 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Success step
-      run: exit 1
-  
+      run: |
+        echo "xD2"
   ms-teams-notification-success:
     needs: job-2
     name: MS Teams Notification
