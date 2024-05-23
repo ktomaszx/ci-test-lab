@@ -26,4 +26,4 @@ jobs:
     - name: Check env
       run: |
         echo "xD"
-        cat $GITHUB_STEP_SUMMARY
+        echo ${{needs.test.outputs.report_url}}
