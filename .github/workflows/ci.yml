@@ -10,3 +10,11 @@ jobs:
     secrets: inherit
     with:
       env_name: daily-test-123
+  test2:
+    name: Check ENV
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check env
+      run: |
+        echo "xD"
+        echo $GITHUB_STEP_SUMMARY
