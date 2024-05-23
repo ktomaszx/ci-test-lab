@@ -37,7 +37,9 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Success step
-      run: echo "xD"
+      run: |
+        echo "xD"
+        echo "Test github step summary" >> $GITHUB_STEP_SUMMARY
   job-2:
     needs: 
       - job-1
