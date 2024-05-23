@@ -32,7 +32,7 @@ jobs:
     name: success-job
     runs-on: ubuntu-latest
     outputs:
-      image-tag: ${{ steps.generate_report_url.outputs.report_url }}
+      report_url: ${{ steps.generate_report_url.outputs.report_url }}
     steps:
     - uses: actions/checkout@v1
     - name: Success step
