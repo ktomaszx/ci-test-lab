@@ -4,6 +4,14 @@ name: CI
 on:
   workflow_dispatch:
 jobs:
+  test0:
+    name: check
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check env
+      run: |
+        echo "DEBUG 000000"
+        echo $GITHUB_STEP_SUMMARY
   test:
     name: "Run test"
     uses: ./.github/workflows/onclosed.yml
@@ -11,7 +19,6 @@ jobs:
     with:
       env_name: daily-test-123
   test2:
-    if: always()
     name: Check ENV
     runs-on: ubuntu-latest
     steps:
