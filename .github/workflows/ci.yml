@@ -11,6 +11,7 @@ jobs:
     with:
       env_name: daily-test-123
   test2:
+    if: always()
     name: Check ENV
     runs-on: ubuntu-latest
     steps:
