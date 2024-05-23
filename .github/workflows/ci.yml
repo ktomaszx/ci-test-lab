@@ -26,4 +26,4 @@ jobs:
     - name: Check env
       run: |
         echo "xD"
-        echo $GITHUB_STEP_SUMMARY
+        cat $GITHUB_STEP_SUMMARY
