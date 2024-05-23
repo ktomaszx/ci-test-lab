@@ -13,6 +13,10 @@ on:
         description: "test"
         default: false
   workflow_call:
+    outputs:
+      report_url:
+        description: Link to the report
+        value: ${{ jobs.job-1.outputs.report_url }}        
     inputs:
       env_name:
         type: string
@@ -27,12 +31,16 @@ jobs:
   job-1:
     name: success-job
     runs-on: ubuntu-latest
+    outputs:
+      image-tag: ${{ steps.generate_report_url.outputs.report_url }}
     steps:
     - uses: actions/checkout@v1
     - name: Success step
+      id: generate_report_url
       run: |
-        echo "xD"
-        echo "Test github step summary" >> $GITHUB_STEP_SUMMARY
+        report="www.validation-report.com"
+        echo "Test github step summary $report" >> $GITHUB_STEP_SUMMARY
+        echo "report_url=$report" >> "$GITHUB_OUTPUT"
   job-2:
     needs: 
       - job-1
