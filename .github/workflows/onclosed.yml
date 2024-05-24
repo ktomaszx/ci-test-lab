@@ -41,13 +41,3 @@ jobs:
         report="www.validation-report.com"
         echo "Test github step summary $report" >> $GITHUB_STEP_SUMMARY
         echo "report_url=$report" >> "$GITHUB_OUTPUT"
-  job-2:
-    needs: 
-      - job-1
-    name: fail-job
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v1
-    - name: Success step
-      run: |
-        echo "xD2"
