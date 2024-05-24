@@ -41,3 +41,5 @@ jobs:
         report="www.validation-report.com"
         echo "Test github step summary $report" >> $GITHUB_STEP_SUMMARY
         echo "report_url=$report" >> "$GITHUB_OUTPUT"
+        echo "DEBUG"
+        echo ${{ github.event.workflow }}
