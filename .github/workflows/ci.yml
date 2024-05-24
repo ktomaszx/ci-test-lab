@@ -4,26 +4,28 @@ name: CI
 on:
   workflow_dispatch:
 jobs:
-  test0:
-    name: check
-    runs-on: ubuntu-latest
-    steps:
-    - name: Check env
-      run: |
-        echo "DEBUG 000000"
-        echo $GITHUB_STEP_SUMMARY
   test:
     name: "Run test"
     uses: ./.github/workflows/onclosed.yml
     secrets: inherit
     with:
       env_name: daily-test-123
-  test2:
+  ms-teams-notification-success:
     needs: test
-    name: Check ENV
+    name: MS Teams Notification
     runs-on: ubuntu-latest
+    if: ${{ always() && github.event.workflow != '.github/workflows/onclosed.yml' }}
     steps:
-    - name: Check env
-      run: |
-        echo "xD"
-        echo ${{needs.test.outputs.report_url}}
+      - name: Notf color
+        id: col
+        run: |
+            echo "color=17a2b8" >> $GITHUB_OUTPUT
+      - uses: actions/checkout@v4
+      - name: MS Teams
+        uses: jdcargile/ms-teams-notification@v1.4
+        with:
+          github-token: ${{ github.token }} # this will use the runner's token.
+          ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
+          notification-summary: ${{ github.event.workflow }} - ${{ inputs.env_name }}
+          notification-color: ${{ steps.col.outputs.color }}
+          verbose-logging: true
