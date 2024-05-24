@@ -15,9 +15,6 @@ jobs:
     name: MS Teams Notification
     runs-on: ubuntu-latest
     if: ${{ always() && github.event.workflow != '.github/workflows/onclosed.yml' }}
-    strategy:
-      matrix:
-        val_report: ${{ fromJSON(needs.test.outputs.reports) }}
     steps:
       - name: Notf color
         id: col
