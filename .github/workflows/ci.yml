@@ -15,6 +15,9 @@ jobs:
     name: MS Teams Notification
     runs-on: ubuntu-latest
     if: ${{ always() && github.event.workflow != '.github/workflows/onclosed.yml' }}
+    strategy:
+      matrix:
+        val_report: [daily-1, daily-2]
     steps:
       - name: Notf color
         id: col
@@ -26,6 +29,6 @@ jobs:
         with:
           github-token: ${{ github.token }} # this will use the runner's token.
           ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
-          notification-summary: ${{ github.event.workflow }} - ${{ inputs.env_name }}
+          notification-summary: ${{ val_report }}
           notification-color: ${{ steps.col.outputs.color }}
           verbose-logging: true
