@@ -51,28 +51,3 @@ jobs:
     - name: Success step
       run: |
         echo "xD2"
-  ms-teams-notification-success:
-    needs: job-2
-    name: MS Teams Notification
-    runs-on: ubuntu-latest
-    if: ${{ always() && github.event.workflow != '.github/workflows/onclosed.yml' }}
-    steps:
-      - name: Notf color
-        id: col
-        run: |
-          if [ "${{ needs.job-2.result }}" == "success" ]; then
-            echo "color=17a2b8" >> $GITHUB_OUTPUT
-          fi
-          if [ "${{ needs.job-2.result }}" == "failure" ]; then
-            echo "color=47a2b1" >> $GITHUB_OUTPUT
-          fi
-          echo "Test github step summary" >> $GITHUB_STEP_SUMMARY
-      # - uses: actions/checkout@v4
-      # - name: MS Teams
-      #   uses: jdcargile/ms-teams-notification@v1.4
-      #   with:
-      #     github-token: ${{ github.token }} # this will use the runner's token.
-      #     ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
-      #     notification-summary: ${{ github.event.workflow }} - ${{ inputs.env_name }}
-      #     notification-color: ${{ steps.col.outputs.color }}
-      #     verbose-logging: true
