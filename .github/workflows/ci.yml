@@ -16,15 +16,11 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ always() && github.event.workflow != '.github/workflows/onclosed.yml' }}
     steps:
-      - name: Notf color
-        id: col
-        run: |
-            curl -H 'Content-Type: application/json' -d '{"text": "GitHub Actions test message"}' https://intel.webhook.office.com/webhookb2/6738b770-b0a8-45d0-81cc-a0047ee05d69@46c98d88-e344-4ed4-8496-4ed7712e255d/IncomingWebhook/5ea6e65a73204100a703c0c0ee8511a9/fd6e949f-4a48-4d9c-88c6-2e3b75d11393
-      # - name: MS Teams
-      #   uses: jdcargile/ms-teams-notification@v1.4
-      #   with:
-      #     github-token: ${{ github.token }} # this will use the runner's token.
-      #     ms-teams-webhook-uri: "https://intel.webhook.office.com/webhookb2/6738b770-b0a8-45d0-81cc-a0047ee05d69@46c98d88-e344-4ed4-8496-4ed7712e255d/IncomingWebhook/5ea6e65a73204100a703c0c0ee8511a9/fd6e949f-4a48-4d9c-88c6-2e3b75d11393"
-      #     notification-summary: ${{ matrix.val_report }}
-      #     notification-color: ${{ steps.col.outputs.color }}
-      #     verbose-logging: true
+      - name: MS Teams
+        uses: jdcargile/ms-teams-notification@v1.4
+        with:
+          github-token: ${{ github.token }} # this will use the runner's token.
+          ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
+          notification-summary: ${{ matrix.val_report }}
+          notification-color: ${{ steps.col.outputs.color }}
+          verbose-logging: true
