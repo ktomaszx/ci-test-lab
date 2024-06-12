@@ -4,23 +4,30 @@ name: CI
 on:
   workflow_dispatch:
 jobs:
-  test:
-    name: "Run test"
-    uses: ./.github/workflows/onclosed.yml
-    secrets: inherit
-    with:
-      env_name: daily-test-123
-  ms-teams-notification-success:
-    needs: test
-    name: MS Teams Notification
+  example_matrix:
     runs-on: ubuntu-latest
-    if: ${{ always() && github.event.workflow != '.github/workflows/onclosed.yml' }}
+    strategy:
+      matrix:
+        version: [10, 12, 14]
     steps:
-      - name: MS Teams
-        uses: jdcargile/ms-teams-notification@v1.4
-        with:
-          github-token: "d32r3232f"
-          ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
-          notification-summary: ${{ matrix.val_report }}
-          notification-color: ${{ steps.col.outputs.color }}
-          verbose-logging: true
+      - run: echo ${{ matrix.version }}
+  # test:
+  #   name: "Run test"
+  #   uses: ./.github/workflows/onclosed.yml
+  #   secrets: inherit
+  #   with:
+  #     env_name: daily-test-123
+  # ms-teams-notification-success:
+  #   needs: test
+  #   name: MS Teams Notification
+  #   runs-on: ubuntu-latest
+  #   if: ${{ always() && github.event.workflow != '.github/workflows/onclosed.yml' }}
+  #   steps:
+  #     - name: MS Teams
+  #       uses: jdcargile/ms-teams-notification@v1.4
+  #       with:
+  #         github-token: "d32r3232f"
+  #         ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
+  #         notification-summary: ${{ matrix.val_report }}
+  #         notification-color: ${{ steps.col.outputs.color }}
+  #         verbose-logging: true
